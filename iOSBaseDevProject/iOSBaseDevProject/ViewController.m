@@ -24,10 +24,10 @@
     // 把vc加入进去
     UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:vc];
     // 标签栏图标
-    nv.tabBarItem =[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemBookmarks tag:0];
+    nv.tabBarItem =[[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"ekg.png"] tag:0];
     
     // 实例的数组
-    NSArray *controllersArray = @[nv];
+    NSArray *controllersArray = @[nv,nv,nv,nv];
     // 数组加入到标签控制器
     [self setViewControllers:controllersArray animated:YES];
 }

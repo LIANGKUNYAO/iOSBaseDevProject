@@ -17,8 +17,75 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //设置背景色
+    //self.view.backgroundColor = UIColorFromHex(0xF0F0F0);
+    //设置导航栏颜色
+    //self.navigationController.navigationBar.barTintColor = UIColorFromHex(0xBE0A14);
+    //self.navigationController.navigationBar.translucent = NO;
+    //设置导航栏背景为空
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    //去掉导航条底部横线
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    //设置导航栏字体
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //self.title = @"首页";
+    //直接设置导航栏标题
+    self.navigationItem.title = @"首页";
+    
+    UIView *contentView = [self getScrollContentViewWithBgColor:0xF0F0F0];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    UIImageView *headerView = [self getHeaderView];
+    [contentView addSubview:headerView];
+    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(contentView);
+        make.left.right.equalTo(contentView);
+        make.height.mas_equalTo(250);
+    }];
+    
+    UIView *view = [[UIView alloc]init];
+    [contentView addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headerView);
+        make.bottom.equalTo(contentView);
+        make.left.right.equalTo(contentView);
+        make.height.mas_equalTo(800);
+    }];
 }
 
+#pragma mark - UIs
+//ScrollView
+- (UIView *)getScrollContentViewWithBgColor:(int)bgColor{
+    __weak __typeof__(self) weakSelf = self;
+    
+    UIScrollView *scrollView = [[UIScrollView alloc]init];
+    scrollView.backgroundColor = UIColorFromHex(bgColor);
+    [self.view addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.equalTo(weakSelf.view);
+    }];
+    
+    UIView *contentView = [[UIView alloc]init];
+    [scrollView addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.left.equalTo(scrollView);
+        //留出部分冗余
+        make.bottom.equalTo(scrollView).with.offset(-64);
+        //水平方向不滚动
+        make.width.equalTo(scrollView);
+    }];
+    return contentView;
+}
+//HeaderView
+- (UIImageView *)getHeaderView{
+    UIImageView *view = [[UIImageView alloc]init];
+    view.image = [UIImage imageNamed:@"bgRed.png"];
+    return view;
+}
+
+
+
+#pragma mark - LifeCycle
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
