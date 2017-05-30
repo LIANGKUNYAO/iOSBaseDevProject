@@ -7,8 +7,9 @@
 //
 
 #import "HomeViewController.h"
+#import "UIImage+JKColor.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<UIScrollViewDelegate>
 
 @end
 
@@ -64,6 +65,7 @@
     [scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.equalTo(weakSelf.view);
     }];
+    scrollView.delegate = self;
     
     UIView *contentView = [[UIView alloc]init];
     [scrollView addSubview:contentView];
@@ -83,7 +85,24 @@
     return view;
 }
 
+#pragma mark - Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat y = scrollView.contentOffset.y;
+    UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,y/100);
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage jk_imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
+}
 
+
+-(UIImage *)imageWithBgColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 #pragma mark - LifeCycle
 - (void)didReceiveMemoryWarning {
