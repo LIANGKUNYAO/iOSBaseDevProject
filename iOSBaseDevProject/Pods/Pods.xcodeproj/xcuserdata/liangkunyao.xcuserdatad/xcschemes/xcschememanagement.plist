@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>JKCategories.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,7 +32,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>9A0013984254F26AF17A80730BD4F480</key>
+		<key>8D428D23B9A40307A6F5852F8E042A12</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -53,11 +48,6 @@
 			<true/>
 		</dict>
 		<key>A02362C7B830CFFC6257AB9162E9798F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BFC104EA05596275561DC3F086C247AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

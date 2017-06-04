@@ -18,6 +18,7 @@
 		B57DE6641EDA615500705E38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B57DE6621EDA615500705E38 /* LaunchScreen.storyboard */; };
 		B57DE66F1EDA615500705E38 /* iOSBaseDevProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE66E1EDA615500705E38 /* iOSBaseDevProjectTests.m */; };
 		B57DE67A1EDA615500705E38 /* iOSBaseDevProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE6791EDA615500705E38 /* iOSBaseDevProjectUITests.m */; };
+		B59DAAE71EE441A100E1873F /* UIImage+KYLE.m in Sources */ = {isa = PBXBuildFile; fileRef = B59DAAE61EE441A100E1873F /* UIImage+KYLE.m */; };
 		B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3964B1EDA68050028626F /* HomeViewController.m */; };
 		D5E15AABFE482F6202B2DA5F /* libPods-iOSBaseDevProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F80DD83600D7B0AC4DAE6A3 /* libPods-iOSBaseDevProject.a */; };
 		FDA8C37E1060C2EEC5F8354E /* libPods-iOSBaseDevProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E687ED5FFD2ECD09F003D3FF /* libPods-iOSBaseDevProjectTests.a */; };
@@ -63,6 +64,8 @@
 		B57DE6751EDA615500705E38 /* iOSBaseDevProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSBaseDevProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B57DE6791EDA615500705E38 /* iOSBaseDevProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSBaseDevProjectUITests.m; sourceTree = "<group>"; };
 		B57DE67B1EDA615500705E38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59DAAE51EE441A100E1873F /* UIImage+KYLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KYLE.h"; sourceTree = "<group>"; };
+		B59DAAE61EE441A100E1873F /* UIImage+KYLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KYLE.m"; sourceTree = "<group>"; };
 		B5D396441EDA670D0028626F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B5D3964A1EDA68050028626F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B5D3964B1EDA68050028626F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -202,6 +205,7 @@
 		B57DE6541EDA615500705E38 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B59DAAE41EE441A100E1873F /* Categories */,
 				B56A1B031EDAFB6600D6BF69 /* Resources */,
 				B57DE6551EDA615500705E38 /* main.m */,
 			);
@@ -224,6 +228,15 @@
 				B57DE67B1EDA615500705E38 /* Info.plist */,
 			);
 			path = iOSBaseDevProjectUITests;
+			sourceTree = "<group>";
+		};
+		B59DAAE41EE441A100E1873F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B59DAAE51EE441A100E1873F /* UIImage+KYLE.h */,
+				B59DAAE61EE441A100E1873F /* UIImage+KYLE.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		B5D396451EDA67EB0028626F /* Classes */ = {
@@ -554,6 +567,7 @@
 			files = (
 				B57DE65C1EDA615500705E38 /* ViewController.m in Sources */,
 				B57DE6591EDA615500705E38 /* AppDelegate.m in Sources */,
+				B59DAAE71EE441A100E1873F /* UIImage+KYLE.m in Sources */,
 				B57DE6561EDA615500705E38 /* main.m in Sources */,
 				B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */,
 			);

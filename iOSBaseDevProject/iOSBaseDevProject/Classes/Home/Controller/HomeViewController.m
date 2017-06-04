@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-#import "UIImage+JKColor.h"
+#import "UIImage+KYLE.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>
 
