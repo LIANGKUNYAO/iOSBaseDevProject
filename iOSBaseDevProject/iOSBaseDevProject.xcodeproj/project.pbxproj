@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		26B4BF763C940D67A96A30BB /* libPods-iOSBaseDevProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B6DA87D92DF849C0A69E39 /* libPods-iOSBaseDevProjectUITests.a */; };
+		B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53A22141EEAD9D50081DE7B /* WebViewController.m */; };
+		B53A22171EEAE08B0081DE7B /* WebViewJavascriptBridge.html in Resources */ = {isa = PBXBuildFile; fileRef = B53A22161EEAE08B0081DE7B /* WebViewJavascriptBridge.html */; };
 		B56A1B271EDB11A400D6BF69 /* bgRed.png in Resources */ = {isa = PBXBuildFile; fileRef = B56A1B241EDB11A400D6BF69 /* bgRed.png */; };
 		B56A1B281EDB11A400D6BF69 /* ekg.png in Resources */ = {isa = PBXBuildFile; fileRef = B56A1B261EDB11A400D6BF69 /* ekg.png */; };
 		B57DE6561EDA615500705E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE6551EDA615500705E38 /* main.m */; };
@@ -18,6 +20,14 @@
 		B57DE6641EDA615500705E38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B57DE6621EDA615500705E38 /* LaunchScreen.storyboard */; };
 		B57DE66F1EDA615500705E38 /* iOSBaseDevProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE66E1EDA615500705E38 /* iOSBaseDevProjectTests.m */; };
 		B57DE67A1EDA615500705E38 /* iOSBaseDevProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE6791EDA615500705E38 /* iOSBaseDevProjectUITests.m */; };
+		B59896911EE83960008E7E5E /* mui.css in Resources */ = {isa = PBXBuildFile; fileRef = B59896861EE83960008E7E5E /* mui.css */; };
+		B59896921EE83960008E7E5E /* mui.min.css in Resources */ = {isa = PBXBuildFile; fileRef = B59896871EE83960008E7E5E /* mui.min.css */; };
+		B59896931EE83960008E7E5E /* mui.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B59896891EE83960008E7E5E /* mui.ttf */; };
+		B59896941EE83960008E7E5E /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = B598968A1EE83960008E7E5E /* index.html */; };
+		B59896951EE83960008E7E5E /* angular.js in Resources */ = {isa = PBXBuildFile; fileRef = B598968C1EE83960008E7E5E /* angular.js */; };
+		B59896961EE83960008E7E5E /* angular.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B598968D1EE83960008E7E5E /* angular.min.js */; };
+		B59896971EE83960008E7E5E /* mui.js in Resources */ = {isa = PBXBuildFile; fileRef = B598968F1EE83960008E7E5E /* mui.js */; };
+		B59896981EE83960008E7E5E /* mui.min.js in Resources */ = {isa = PBXBuildFile; fileRef = B59896901EE83960008E7E5E /* mui.min.js */; };
 		B59DAAE71EE441A100E1873F /* UIImage+KYLE.m in Sources */ = {isa = PBXBuildFile; fileRef = B59DAAE61EE441A100E1873F /* UIImage+KYLE.m */; };
 		B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3964B1EDA68050028626F /* HomeViewController.m */; };
 		D5E15AABFE482F6202B2DA5F /* libPods-iOSBaseDevProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F80DD83600D7B0AC4DAE6A3 /* libPods-iOSBaseDevProject.a */; };
@@ -46,6 +56,9 @@
 		7424E0454BBE95E31DBB31EE /* Pods-iOSBaseDevProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProject/Pods-iOSBaseDevProject.release.xcconfig"; sourceTree = "<group>"; };
 		7F80DD83600D7B0AC4DAE6A3 /* libPods-iOSBaseDevProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSBaseDevProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8440A67ADE1CDF50C298FE0A /* Pods-iOSBaseDevProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProjectUITests/Pods-iOSBaseDevProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B53A22131EEAD9D50081DE7B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		B53A22141EEAD9D50081DE7B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		B53A22161EEAE08B0081DE7B /* WebViewJavascriptBridge.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WebViewJavascriptBridge.html; sourceTree = "<group>"; };
 		B56A1B241EDB11A400D6BF69 /* bgRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgRed.png; sourceTree = "<group>"; };
 		B56A1B261EDB11A400D6BF69 /* ekg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ekg.png; sourceTree = "<group>"; };
 		B57DE6511EDA615500705E38 /* iOSBaseDevProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSBaseDevProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +77,15 @@
 		B57DE6751EDA615500705E38 /* iOSBaseDevProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSBaseDevProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B57DE6791EDA615500705E38 /* iOSBaseDevProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOSBaseDevProjectUITests.m; sourceTree = "<group>"; };
 		B57DE67B1EDA615500705E38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B59896861EE83960008E7E5E /* mui.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = mui.css; sourceTree = "<group>"; };
+		B59896871EE83960008E7E5E /* mui.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = mui.min.css; sourceTree = "<group>"; };
+		B59896891EE83960008E7E5E /* mui.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mui.ttf; sourceTree = "<group>"; };
+		B598968A1EE83960008E7E5E /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		B598968C1EE83960008E7E5E /* angular.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = angular.js; sourceTree = "<group>"; };
+		B598968D1EE83960008E7E5E /* angular.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = angular.min.js; sourceTree = "<group>"; };
+		B598968E1EE83960008E7E5E /* angular.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = angular.min.js.map; sourceTree = "<group>"; };
+		B598968F1EE83960008E7E5E /* mui.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mui.js; sourceTree = "<group>"; };
+		B59896901EE83960008E7E5E /* mui.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = mui.min.js; sourceTree = "<group>"; };
 		B59DAAE51EE441A100E1873F /* UIImage+KYLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KYLE.h"; sourceTree = "<group>"; };
 		B59DAAE61EE441A100E1873F /* UIImage+KYLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KYLE.m"; sourceTree = "<group>"; };
 		B5D396441EDA670D0028626F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -128,6 +150,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B53A220F1EEAD9A70081DE7B /* Webview */ = {
+			isa = PBXGroup;
+			children = (
+				B53A22101EEAD9A70081DE7B /* Controller */,
+				B53A22111EEAD9A70081DE7B /* Model */,
+				B53A22121EEAD9A70081DE7B /* View */,
+			);
+			path = Webview;
+			sourceTree = "<group>";
+		};
+		B53A22101EEAD9A70081DE7B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B53A22131EEAD9D50081DE7B /* WebViewController.h */,
+				B53A22141EEAD9D50081DE7B /* WebViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B53A22111EEAD9A70081DE7B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B53A22121EEAD9A70081DE7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B56A1B031EDAFB6600D6BF69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +241,7 @@
 		B57DE6531EDA615500705E38 /* iOSBaseDevProject */ = {
 			isa = PBXGroup;
 			children = (
+				B59896841EE83960008E7E5E /* WebContent */,
 				B5D396451EDA67EB0028626F /* Classes */,
 				B57DE6571EDA615500705E38 /* AppDelegate.h */,
 				B57DE6581EDA615500705E38 /* AppDelegate.m */,
@@ -230,6 +286,47 @@
 			path = iOSBaseDevProjectUITests;
 			sourceTree = "<group>";
 		};
+		B59896841EE83960008E7E5E /* WebContent */ = {
+			isa = PBXGroup;
+			children = (
+				B598968B1EE83960008E7E5E /* js */,
+				B59896881EE83960008E7E5E /* fonts */,
+				B59896851EE83960008E7E5E /* css */,
+				B598968A1EE83960008E7E5E /* index.html */,
+				B53A22161EEAE08B0081DE7B /* WebViewJavascriptBridge.html */,
+			);
+			path = WebContent;
+			sourceTree = "<group>";
+		};
+		B59896851EE83960008E7E5E /* css */ = {
+			isa = PBXGroup;
+			children = (
+				B59896861EE83960008E7E5E /* mui.css */,
+				B59896871EE83960008E7E5E /* mui.min.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		B59896881EE83960008E7E5E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B59896891EE83960008E7E5E /* mui.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		B598968B1EE83960008E7E5E /* js */ = {
+			isa = PBXGroup;
+			children = (
+				B598968C1EE83960008E7E5E /* angular.js */,
+				B598968D1EE83960008E7E5E /* angular.min.js */,
+				B598968E1EE83960008E7E5E /* angular.min.js.map */,
+				B598968F1EE83960008E7E5E /* mui.js */,
+				B59896901EE83960008E7E5E /* mui.min.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
 		B59DAAE41EE441A100E1873F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +339,7 @@
 		B5D396451EDA67EB0028626F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B53A220F1EEAD9A70081DE7B /* Webview */,
 				B5D396461EDA67EB0028626F /* Home */,
 			);
 			path = Classes;
@@ -398,10 +496,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B53A22171EEAE08B0081DE7B /* WebViewJavascriptBridge.html in Resources */,
+				B59896971EE83960008E7E5E /* mui.js in Resources */,
 				B56A1B281EDB11A400D6BF69 /* ekg.png in Resources */,
+				B59896921EE83960008E7E5E /* mui.min.css in Resources */,
 				B56A1B271EDB11A400D6BF69 /* bgRed.png in Resources */,
+				B59896941EE83960008E7E5E /* index.html in Resources */,
+				B59896961EE83960008E7E5E /* angular.min.js in Resources */,
+				B59896981EE83960008E7E5E /* mui.min.js in Resources */,
 				B57DE6641EDA615500705E38 /* LaunchScreen.storyboard in Resources */,
+				B59896911EE83960008E7E5E /* mui.css in Resources */,
 				B57DE6611EDA615500705E38 /* Assets.xcassets in Resources */,
+				B59896951EE83960008E7E5E /* angular.js in Resources */,
+				B59896931EE83960008E7E5E /* mui.ttf in Resources */,
 				B57DE65F1EDA615500705E38 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,6 +673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B57DE65C1EDA615500705E38 /* ViewController.m in Sources */,
+				B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */,
 				B57DE6591EDA615500705E38 /* AppDelegate.m in Sources */,
 				B59DAAE71EE441A100E1873F /* UIImage+KYLE.m in Sources */,
 				B57DE6561EDA615500705E38 /* main.m in Sources */,

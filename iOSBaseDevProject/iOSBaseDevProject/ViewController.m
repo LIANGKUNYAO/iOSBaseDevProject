@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "HomeViewController.h"
+#import "WebViewController.h"
 
 @interface ViewController ()
 
@@ -25,14 +26,11 @@
     UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:vc];
     // 标签栏图标
     nv.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"ekg.png"] tag:0];
+    [self addChildViewController:nv];
     
-    HomeViewController *vc1 = [[HomeViewController alloc] init];
+    WebViewController *vc1 = [[WebViewController alloc] init];
     vc1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"ekg.png"] tag:1];
-
-    // 实例的数组
-    NSArray *controllersArray = @[nv,vc1];
-    // 数组加入到标签控制器
-    [self setViewControllers:controllersArray animated:YES];
+    [self addChildViewController:vc1];
 }
 
 
