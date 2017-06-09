@@ -16,25 +16,32 @@
 @implementation WebViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-    if (_bridge) { return; }
+    if (_bridge) {
+        return;
+    }
     
     UIWebView* webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:webView];
     
     [WebViewJavascriptBridge enableLogging];
     
+    //Create a javascript bridge for the given web view.
     _bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
     [_bridge setWebViewDelegate:self];
     
-    [_bridge registerHandler:@"testObjcCallback" handler:^(id data, WVJBResponseCallback responseCallback) {
-        NSLog(@"testObjcCallback called: %@", data);
-        responseCallback(@"Response from testObjcCallback");
+    //Register a OC handler
+    [self.bridge registerHandler:@"getUserId" handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"JS REQUEST: %@", data);
+        if (responseCallback) {
+            responseCallback(@{@"userId": @"123456"});
+        }
     }];
     
-    [_bridge callHandler:@"testJavascriptHandler" data:@{ @"foo":@"before ready" }];
+    //Call a JS handler
+    [self.bridge callHandler:@"showYourName" data:nil responseCallback:nil];
     
     [self renderButtons:webView];
-    [self loadExamplePage:webView];
+    [self loadPage:webView];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
@@ -75,14 +82,13 @@
 }
 
 - (void)callHandler:(id)sender {
-    id data = @{ @"greetingFromObjC": @"Hi there, JS!" };
-    [_bridge callHandler:@"testJavascriptHandler" data:data responseCallback:^(id response) {
-        NSLog(@"testJavascriptHandler responded: %@", response);
+    [self.bridge callHandler:@"showMyName" data:@{@"name": @"kyle"} responseCallback:^(id responseData) {
+        NSLog(@"JS RESPONESE: %@", responseData);
     }];
 }
 
-- (void)loadExamplePage:(UIWebView*)webView {
-    NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"WebViewJavascriptBridge" ofType:@"html"];
+- (void)loadPage:(UIWebView*)webView {
+    NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
     NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
     NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
     [webView loadHTMLString:appHtml baseURL:baseURL];
