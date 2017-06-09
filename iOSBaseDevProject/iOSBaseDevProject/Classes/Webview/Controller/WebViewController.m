@@ -23,7 +23,7 @@
     UIWebView* webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:webView];
     
-    [WebViewJavascriptBridge enableLogging];
+    //[WebViewJavascriptBridge enableLogging];
     
     //Create a javascript bridge for the given web view.
     _bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
@@ -36,9 +36,9 @@
             responseCallback(@{@"userId": @"123456"});
         }
     }];
-    
+
     //Call a JS handler
-    [self.bridge callHandler:@"showYourName" data:nil responseCallback:nil];
+    [self.bridge callHandler:@"showMyName"];
     
     [self renderButtons:webView];
     [self loadPage:webView];
