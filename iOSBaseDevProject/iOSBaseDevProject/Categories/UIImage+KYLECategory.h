@@ -1,5 +1,5 @@
 //
-//  UIImage+Color.h
+//  UIImage+KYLECategory.h
 //  JKCategories (https://github.com/shaojiankui/JKCategories)
 //
 //  Created by Jakey on 14/12/15.

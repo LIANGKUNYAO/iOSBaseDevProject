@@ -7,10 +7,12 @@
 //
 
 #import "HomeViewController.h"
-#import "UIImage+KYLE.h"
+#import "UIImage+KYLECategory.h"
+#import "MJRefresh.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>
-
+@property (nonatomic, strong) UIView* contentView;
+@property (nonatomic, strong) UIImageView* headerView;
 @end
 
 @implementation HomeViewController
@@ -33,23 +35,24 @@
     //直接设置导航栏标题
     self.navigationItem.title = @"首页";
     
-    UIView *contentView = [self getScrollContentViewWithBgColor:0xF0F0F0];
+    __weak __typeof__(self) weakSelf = self;
+    self.contentView = [self getScrollContentViewWithBgColor:0xF0F0F0];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    UIImageView *headerView = [self getHeaderView];
-    [contentView addSubview:headerView];
-    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(contentView);
-        make.left.right.equalTo(contentView);
+    [self.contentView addSubview:self.headerView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.contentView);
+        make.left.right.equalTo(weakSelf.contentView);
         make.height.mas_equalTo(250);
     }];
     
     UIView *view = [[UIView alloc]init];
-    [contentView addSubview:view];
+    [view setBackgroundColor:[UIColor blueColor]];
+    [self.contentView addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headerView);
-        make.bottom.equalTo(contentView);
-        make.left.right.equalTo(contentView);
+        make.top.equalTo(weakSelf.headerView.mas_bottom);
+        make.bottom.equalTo(weakSelf.contentView);
+        make.left.right.equalTo(weakSelf.contentView);
         make.height.mas_equalTo(800);
     }];
 }
@@ -79,17 +82,37 @@
     return contentView;
 }
 //HeaderView
-- (UIImageView *)getHeaderView{
-    UIImageView *view = [[UIImageView alloc]init];
-    view.image = [UIImage imageNamed:@"bgRed.png"];
-    return view;
+- (UIImageView *)headerView{
+    if(!_headerView){
+        _headerView = [[UIImageView alloc]init];
+        [_headerView setImage:[UIImage imageNamed:@"bgRed"]];
+        [_headerView setContentMode:UIViewContentModeScaleAspectFill];
+    }
+    return _headerView;
 }
+
 
 #pragma mark - Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat y = scrollView.contentOffset.y;
     UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,y/100);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage jk_imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
+    
+    __weak __typeof__(self) weakSelf = self;
+    
+//    if(y<0){
+//        [_headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(weakSelf.view);
+//            make.left.right.equalTo(weakSelf.contentView);
+//            make.height.mas_equalTo(250-y);
+//        }];
+//    }else{
+//        [self.headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(weakSelf.contentView);
+//            make.left.right.equalTo(weakSelf.contentView);
+//            make.height.mas_equalTo(250);
+//        }];
+//    }
 }
 
 
