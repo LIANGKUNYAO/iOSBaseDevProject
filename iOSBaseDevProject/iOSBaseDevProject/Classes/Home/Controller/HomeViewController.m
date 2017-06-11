@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import "UIImage+KYLECategory.h"
-#import "MJRefresh.h"
+#import "CardView.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView* contentView;
@@ -46,8 +46,7 @@
         make.height.mas_equalTo(250);
     }];
     
-    UIView *view = [[UIView alloc]init];
-    [view setBackgroundColor:[UIColor blueColor]];
+    CardView *view = [[CardView alloc]initWithFrame:CGRectZero];
     [self.contentView addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.headerView.mas_bottom);
@@ -95,24 +94,13 @@
 #pragma mark - Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat y = scrollView.contentOffset.y;
+    
+    //禁止向上延伸
+    scrollView.bounces = (y <= 0) ? NO : YES;
+    //向下时设置导航栏颜色
     UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,y/100);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage jk_imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
     
-    __weak __typeof__(self) weakSelf = self;
-    
-//    if(y<0){
-//        [_headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(weakSelf.view);
-//            make.left.right.equalTo(weakSelf.contentView);
-//            make.height.mas_equalTo(250-y);
-//        }];
-//    }else{
-//        [self.headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(weakSelf.contentView);
-//            make.left.right.equalTo(weakSelf.contentView);
-//            make.height.mas_equalTo(250);
-//        }];
-//    }
 }
 
 
