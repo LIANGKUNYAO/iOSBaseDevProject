@@ -16,32 +16,32 @@
 @implementation WebViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-    if (_bridge) {
-        return;
+    if (!_bridge) {
+        self.view.backgroundColor = UIColorFromHex(0xF7F7F7);
+        
+        UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [self.view addSubview:webView];
+        
+        //[WebViewJavascriptBridge enableLogging];
+        
+        //Create a javascript bridge for the given web view.
+        _bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
+        [_bridge setWebViewDelegate:self];
+        
+        //Register a OC handler
+        [self.bridge registerHandler:@"getUserId" handler:^(id data, WVJBResponseCallback responseCallback) {
+            NSLog(@"JS REQUEST: %@", data);
+            if (responseCallback) {
+                responseCallback(@{@"userId": @"123456"});
+            }
+        }];
+        
+        //Call a JS handler
+        [self.bridge callHandler:@"showMyName"];
+        
+        [self renderButtons:webView];
+        [self loadPage:webView];
     }
-    
-    UIWebView* webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:webView];
-    
-    //[WebViewJavascriptBridge enableLogging];
-    
-    //Create a javascript bridge for the given web view.
-    _bridge = [WebViewJavascriptBridge bridgeForWebView:webView];
-    [_bridge setWebViewDelegate:self];
-    
-    //Register a OC handler
-    [self.bridge registerHandler:@"getUserId" handler:^(id data, WVJBResponseCallback responseCallback) {
-        NSLog(@"JS REQUEST: %@", data);
-        if (responseCallback) {
-            responseCallback(@{@"userId": @"123456"});
-        }
-    }];
-
-    //Call a JS handler
-    [self.bridge callHandler:@"showMyName"];
-    
-    [self renderButtons:webView];
-    [self loadPage:webView];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
@@ -93,4 +93,5 @@
     NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
     [webView loadHTMLString:appHtml baseURL:baseURL];
 }
+
 @end

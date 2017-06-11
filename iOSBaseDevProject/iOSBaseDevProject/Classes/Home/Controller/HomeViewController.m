@@ -25,14 +25,18 @@
     //设置导航栏颜色
     //self.navigationController.navigationBar.barTintColor = UIColorFromHex(0xBE0A14);
     //self.navigationController.navigationBar.translucent = NO;
+    
+    //通过设置barStyle来改变statusBar的字体颜色
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack]; //default UIBarStyleDefault
     //设置导航栏背景为空
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     //去掉导航条底部横线
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     //设置导航栏字体
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    //self.title = @"首页";
-    //直接设置导航栏标题
+    //设置导航栏标题，同时改变tabBar中的文字
+    //self.title = @"首页123";
+    //只设置导航栏标题
     self.navigationItem.title = @"首页";
     
     __weak __typeof__(self) weakSelf = self;
@@ -103,17 +107,6 @@
     
 }
 
-
--(UIImage *)imageWithBgColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
 
 #pragma mark - LifeCycle
 - (void)didReceiveMemoryWarning {
