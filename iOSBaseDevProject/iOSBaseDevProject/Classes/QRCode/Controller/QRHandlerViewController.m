@@ -8,9 +8,10 @@
 
 #import "QRHandlerViewController.h"
 #import "ScanView.h"
+#import <MessageUI/MessageUI.h>
 
-@interface QRHandlerViewController ()<ScanViewDelegate>
-
+@interface QRHandlerViewController ()<ScanViewDelegate,MFMailComposeViewControllerDelegate>
+@property (nonatomic, strong) ScanView* scanView;
 @end
 
 @implementation QRHandlerViewController
@@ -19,9 +20,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"扫一扫";
-    ScanView *scanView = [[ScanView alloc]initWithFrame:self.view.bounds];
-    scanView.delegate = self;
-    [self.view addSubview:scanView];
+    self.scanView = [[ScanView alloc]initWithFrame:self.view.bounds];
+    self.scanView.delegate = self;
+    [self.view addSubview:self.scanView];
 }
 
 #pragma mark - Delegates
@@ -30,10 +31,34 @@
     
     NSRange range = [result rangeOfString:RegularExpressionURL options:NSRegularExpressionSearch];
     if (range.location != NSNotFound) {
-        NSLog(@"%@",result);
-        [scanView startScan];
+        NSString *urlString = [result substringWithRange:range];
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSData *xmlData = [NSData dataWithContentsOfURL:url];
+        NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
+        // 异常处理
+        if (![MFMailComposeViewController canSendMail]) {
+            [scanView startScan];
+        }else{
+            MFMailComposeViewController *mailVc = [[MFMailComposeViewController alloc] init];
+            // 设置邮件主题
+            [mailVc setSubject:result];
+            // 设置邮件内容
+            [mailVc setMessageBody:xmlString isHTML:NO];
+            // 设置收件人列表
+            [mailVc setToRecipients:@[@"liangkunyao@hotmail.com"]];
+            // 设置代理
+            mailVc.mailComposeDelegate = self;
+            // 显示控制器
+            [self presentViewController:mailVc animated:YES completion:nil];
+        }
     }
 }
+//Email发送Controller回调
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    [self.scanView startScan];
+}
+
 
 #pragma mark - LifeCycles
 - (void)didReceiveMemoryWarning {
