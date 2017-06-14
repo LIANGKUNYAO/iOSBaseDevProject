@@ -92,3 +92,6 @@
 #define StartTag CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
 #define EndTag  NSLog(@"Time: %f", CFAbsoluteTimeGetCurrent() - start)
 
+
+#define RegularExpressionURL @"[a-zA-z]+://[^\\s]*"
+

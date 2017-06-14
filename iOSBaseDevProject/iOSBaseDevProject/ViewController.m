@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "HomeViewController.h"
 #import "WebViewController.h"
+#import "QRHandlerViewController.h"
 
 @interface ViewController ()
 
@@ -21,16 +22,23 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     // 控制器实例
-    HomeViewController *vc = [[HomeViewController alloc] init];
-    // 把vc加入进去
-    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:vc];
+    HomeViewController *homeView = [[HomeViewController alloc] init];
+    UINavigationController *nv1 = [[UINavigationController alloc] initWithRootViewController:homeView];
     // 标签栏图标
-    nv.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"ekg.png"] tag:0];
-    [self addChildViewController:nv];
+    nv1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"ekg.png"] tag:0];
+    [self addChildViewController:nv1];
     
-    WebViewController *vc1 = [[WebViewController alloc] init];
-    vc1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"ekg.png"] tag:1];
-    [self addChildViewController:vc1];
+    WebViewController *webView = [[WebViewController alloc] init];
+    webView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"ekg.png"] tag:1];
+    [self addChildViewController:webView];
+    
+    
+    QRHandlerViewController *qrView = [[QRHandlerViewController alloc] init];
+    UINavigationController *nv2 = [[UINavigationController alloc] initWithRootViewController:qrView];
+    nv2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[UIImage imageNamed:@"ekg.png"] tag:1];
+    [self addChildViewController:nv2];
+    
+    
 }
 
 

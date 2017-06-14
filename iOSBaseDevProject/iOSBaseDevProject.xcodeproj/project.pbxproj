@@ -13,6 +13,11 @@
 		B5458B101EED4A21001D41F4 /* css in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0D1EED4A21001D41F4 /* css */; };
 		B5458B111EED4A21001D41F4 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0E1EED4A21001D41F4 /* fonts */; };
 		B5458B121EED4A21001D41F4 /* js in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0F1EED4A21001D41F4 /* js */; };
+		B55EB9571EF02502002F4F2A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55EB9561EF02502002F4F2A /* AVFoundation.framework */; };
+		B55EB95E1EF02643002F4F2A /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = B55EB95D1EF02643002F4F2A /* ScanView.m */; };
+		B55EB9611EF0266B002F4F2A /* QRHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55EB9601EF0266B002F4F2A /* QRHandlerViewController.m */; };
+		B55EB9681EF02A0E002F4F2A /* scanFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = B55EB9661EF02A0E002F4F2A /* scanFrame.png */; };
+		B55EB9691EF02A0E002F4F2A /* scanLine.png in Resources */ = {isa = PBXBuildFile; fileRef = B55EB9671EF02A0E002F4F2A /* scanLine.png */; };
 		B56A1B271EDB11A400D6BF69 /* bgRed.png in Resources */ = {isa = PBXBuildFile; fileRef = B56A1B241EDB11A400D6BF69 /* bgRed.png */; };
 		B56A1B281EDB11A400D6BF69 /* ekg.png in Resources */ = {isa = PBXBuildFile; fileRef = B56A1B261EDB11A400D6BF69 /* ekg.png */; };
 		B57DE6561EDA615500705E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE6551EDA615500705E38 /* main.m */; };
@@ -59,6 +64,13 @@
 		B5458B0D1EED4A21001D41F4 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
 		B5458B0E1EED4A21001D41F4 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B5458B0F1EED4A21001D41F4 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
+		B55EB9561EF02502002F4F2A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B55EB95C1EF02643002F4F2A /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
+		B55EB95D1EF02643002F4F2A /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
+		B55EB95F1EF0266B002F4F2A /* QRHandlerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRHandlerViewController.h; sourceTree = "<group>"; };
+		B55EB9601EF0266B002F4F2A /* QRHandlerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRHandlerViewController.m; sourceTree = "<group>"; };
+		B55EB9661EF02A0E002F4F2A /* scanFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanFrame.png; sourceTree = "<group>"; };
+		B55EB9671EF02A0E002F4F2A /* scanLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanLine.png; sourceTree = "<group>"; };
 		B56A1B241EDB11A400D6BF69 /* bgRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgRed.png; sourceTree = "<group>"; };
 		B56A1B261EDB11A400D6BF69 /* ekg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ekg.png; sourceTree = "<group>"; };
 		B57DE6511EDA615500705E38 /* iOSBaseDevProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSBaseDevProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55EB9571EF02502002F4F2A /* AVFoundation.framework in Frameworks */,
 				D5E15AABFE482F6202B2DA5F /* libPods-iOSBaseDevProject.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +148,7 @@
 		A52AD687E3F5C9A206C5F7E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B55EB9561EF02502002F4F2A /* AVFoundation.framework */,
 				7F80DD83600D7B0AC4DAE6A3 /* libPods-iOSBaseDevProject.a */,
 				E687ED5FFD2ECD09F003D3FF /* libPods-iOSBaseDevProjectTests.a */,
 				E6B6DA87D92DF849C0A69E39 /* libPods-iOSBaseDevProjectUITests.a */,
@@ -175,6 +189,50 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B55EB9581EF02534002F4F2A /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				B55EB9591EF02548002F4F2A /* Controller */,
+				B55EB95A1EF02548002F4F2A /* Model */,
+				B55EB95B1EF02548002F4F2A /* View */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
+		B55EB9591EF02548002F4F2A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B55EB95F1EF0266B002F4F2A /* QRHandlerViewController.h */,
+				B55EB9601EF0266B002F4F2A /* QRHandlerViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B55EB95A1EF02548002F4F2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B55EB95B1EF02548002F4F2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B55EB95C1EF02643002F4F2A /* ScanView.h */,
+				B55EB95D1EF02643002F4F2A /* ScanView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B55EB9651EF02A0E002F4F2A /* QR */ = {
+			isa = PBXGroup;
+			children = (
+				B55EB9661EF02A0E002F4F2A /* scanFrame.png */,
+				B55EB9671EF02A0E002F4F2A /* scanLine.png */,
+			);
+			path = QR;
+			sourceTree = "<group>";
+		};
 		B56A1B031EDAFB6600D6BF69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +244,7 @@
 		B56A1B041EDAFB6600D6BF69 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B55EB9651EF02A0E002F4F2A /* QR */,
 				B56A1B231EDB11A400D6BF69 /* Home */,
 				B56A1B251EDB11A400D6BF69 /* Public */,
 			);
@@ -301,6 +360,7 @@
 		B5D396451EDA67EB0028626F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B55EB9581EF02534002F4F2A /* QRCode */,
 				B53A220F1EEAD9A70081DE7B /* Webview */,
 				B5D396461EDA67EB0028626F /* Home */,
 			);
@@ -462,8 +522,10 @@
 			files = (
 				B56A1B281EDB11A400D6BF69 /* ekg.png in Resources */,
 				B5458B121EED4A21001D41F4 /* js in Resources */,
+				B55EB9691EF02A0E002F4F2A /* scanLine.png in Resources */,
 				B56A1B271EDB11A400D6BF69 /* bgRed.png in Resources */,
 				B59896941EE83960008E7E5E /* index.html in Resources */,
+				B55EB9681EF02A0E002F4F2A /* scanFrame.png in Resources */,
 				B5458B101EED4A21001D41F4 /* css in Resources */,
 				B57DE6641EDA615500705E38 /* LaunchScreen.storyboard in Resources */,
 				B57DE6611EDA615500705E38 /* Assets.xcassets in Resources */,
@@ -635,7 +697,9 @@
 				B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */,
 				B57DE6591EDA615500705E38 /* AppDelegate.m in Sources */,
 				B59DAAE71EE441A100E1873F /* UIImage+KYLECategory.m in Sources */,
+				B55EB9611EF0266B002F4F2A /* QRHandlerViewController.m in Sources */,
 				B57DE6561EDA615500705E38 /* main.m in Sources */,
+				B55EB95E1EF02643002F4F2A /* ScanView.m in Sources */,
 				B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */,
 				B5458B061EED07B6001D41F4 /* CardView.m in Sources */,
 			);
