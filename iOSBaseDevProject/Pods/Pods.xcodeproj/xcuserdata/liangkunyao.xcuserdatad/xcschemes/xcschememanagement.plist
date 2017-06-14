@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>WebViewJavascriptBridge.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,17 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>035CFF8A55BE42EC3FE4534F91B1D6A9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>04CF549EBEEE7BC87AEAE35397184D94</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>0EE57C3050FA8FE8DE7942F15EE417DD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3B660886CA67AE2626045E5CD281C41E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -68,6 +68,16 @@
 			<true/>
 		</dict>
 		<key>A02362C7B830CFFC6257AB9162E9798F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B6153C7C3AC3FD6DB07F152B722B38FB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFC446CAE565EE08EA897AFC636BB3EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
