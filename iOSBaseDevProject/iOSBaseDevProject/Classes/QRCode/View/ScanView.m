@@ -10,95 +10,86 @@
 
 @interface ScanView ()<AVCaptureMetadataOutputObjectsDelegate>
 
+@property (nonatomic, strong) AVCaptureSession *session;
+@property (nonatomic, strong) UIImageView *scanView;
+@property (nonatomic, strong) UIImageView *lineView;
+
 @end
-@implementation ScanView{
-    AVCaptureSession *_session;
-    UIImageView *_scanView;
-    UIImageView *_lineView;
-}
+@implementation ScanView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        [self initView];
+        WeakSelf(weakSelf);
+        
+        _scanView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"scanFrame"]];
+        [self addSubview:_scanView];
+        
+        [_scanView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(weakSelf.self);
+            make.width.height.mas_equalTo(250);
+        }];
+        
+        
+        //获取摄像设备
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        //闪光灯
+        if ([device hasFlash] && [device hasTorch]) {
+            [device lockForConfiguration:nil];
+            [device setFlashMode:AVCaptureFlashModeAuto];
+            [device setTorchMode:AVCaptureTorchModeAuto];
+            [device unlockForConfiguration];
+        }
+        //创建输入流
+        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        
+        //创建输出流
+        AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc]init];
+        //设置代理 刷新线程
+        [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+        
+        output.rectOfInterest = [self rectOfInterestByScanViewRect:_scanView.frame];
+        //初始化连接对象
+        _session = [[AVCaptureSession alloc]init];
+        
+        //采集率
+        _session.sessionPreset = AVCaptureSessionPresetHigh;
+        
+        if (input) {
+            [_session addInput:input];
+        }
+        
+        if (output) {
+            [_session addOutput:output];
+            //设置扫码支持的编码格式
+            
+            NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
+            
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
+                [array addObject:AVMetadataObjectTypeQRCode];
+            }
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN13Code]) {
+                [array addObject:AVMetadataObjectTypeEAN13Code];
+            }
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN8Code]) {
+                [array addObject:AVMetadataObjectTypeEAN8Code];
+            }
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeCode128Code]) {
+                [array addObject:AVMetadataObjectTypeCode128Code];
+            }
+            output.metadataObjectTypes = array;
+        }
+        
+        AVCaptureVideoPreviewLayer *layer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
+        layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        layer.frame = self.bounds;
+        [self.layer insertSublayer:layer above:0];
+        [self bringSubviewToFront:_scanView];
+        [self setMaskView];
+        [_session startRunning];
+        [self loopDrawLine];
     }
     return self;
-}
-
-- (void)initView{
-    UIImage *scanImage = [UIImage imageNamed:@"scanFrame"];
-    CGFloat width = CGRectGetWidth(self.frame);
-    CGFloat height = CGRectGetHeight(self.frame);
-    
-    CGFloat scanW = 200;
-    CGRect scanFrame = CGRectMake(width/2.-100, height/2.-100, scanW, scanW);
-    _scanViewFrame = scanFrame;
-    
-    
-    _scanView = [[UIImageView alloc]initWithImage:scanImage];
-    _scanView.backgroundColor = [UIColor clearColor];
-    _scanView.frame = scanFrame;
-    [self addSubview:_scanView];
-    
-    
-    //获取摄像设备
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    
-    //闪光灯
-    if ([device hasFlash] && [device hasTorch]) {
-        [device lockForConfiguration:nil];
-        [device setFlashMode:AVCaptureFlashModeAuto];
-        [device setTorchMode:AVCaptureTorchModeAuto];
-        [device unlockForConfiguration];
-    }
-    //创建输入流
-    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
-    
-    //创建输出流
-    AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc]init];
-    //设置代理 刷新线程
-    [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    
-    output.rectOfInterest = [self rectOfInterestByScanViewRect:_scanView.frame];
-    //初始化连接对象
-    _session = [[AVCaptureSession alloc]init];
-    
-    //采集率
-    _session.sessionPreset = AVCaptureSessionPresetHigh;
-    
-    if (input) {
-        [_session addInput:input];
-    }
-    
-    if (output) {
-        [_session addOutput:output];
-        //设置扫码支持的编码格式
-        
-        NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-        
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
-            [array addObject:AVMetadataObjectTypeQRCode];
-        }
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN13Code]) {
-            [array addObject:AVMetadataObjectTypeEAN13Code];
-        }
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN8Code]) {
-            [array addObject:AVMetadataObjectTypeEAN8Code];
-        }
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeCode128Code]) {
-            [array addObject:AVMetadataObjectTypeCode128Code];
-        }
-        output.metadataObjectTypes = array;
-    }
-    
-    AVCaptureVideoPreviewLayer *layer = [AVCaptureVideoPreviewLayer layerWithSession:_session];
-    layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    layer.frame = self.bounds;
-    [self.layer insertSublayer:layer above:0];
-    [self bringSubviewToFront:_scanView];
-    [self setOverView];
-    [_session startRunning];
-    [self loopDrawLine];
 }
 
 - (CGRect)rectOfInterestByScanViewRect:(CGRect)rect{
@@ -115,27 +106,42 @@
 }
 
 #pragma mark - 添加模糊效果
-- (void)setOverView{
-    CGFloat width = CGRectGetWidth(self.frame);
-    CGFloat height = CGRectGetHeight(self.frame);
+- (void)setMaskView{
     
-    CGFloat x = CGRectGetMinX(_scanView.frame);
-    CGFloat y = CGRectGetMinY(_scanView.frame);
-    CGFloat w = CGRectGetWidth(_scanView.frame);
-    CGFloat h = CGRectGetHeight(_scanView.frame);
+    WeakSelf(weakSelf);
+    UIView *maskView = [[UIView alloc]init];
+    [self addSubview:maskView];
     
-    [self creatView:CGRectMake(0, 0, width, y)];
-    [self creatView:CGRectMake(0, y + h, width, height - y)];
-    [self creatView:CGRectMake(0, y, x, h)];
-    [self creatView:CGRectMake(x + w, y, x, h)];
-}
-
-- (void)creatView:(CGRect)rect{
-    CGFloat alpha = 0.5;
-    UIView *view = [[UIView alloc]initWithFrame:rect];
-    view.backgroundColor = [UIColor grayColor];
-    view.alpha = alpha;
-    [self addSubview:view];
+    for (int i = 0; i < 4; i++) {
+        UIView *view = [[UIView alloc]init];
+        view.backgroundColor = [UIColor blackColor];
+        view.alpha = 0.5;
+        [maskView addSubview:view];
+        
+        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+            if(i==0){
+                make.top.equalTo(weakSelf);
+                make.right.equalTo(weakSelf);
+                make.left.equalTo(weakSelf);
+                make.bottom.equalTo(weakSelf.scanView.mas_top);
+            }else if(i == 1){
+                make.top.equalTo(weakSelf.scanView);
+                make.right.equalTo(weakSelf);
+                make.left.equalTo(weakSelf.scanView.mas_right);
+                make.bottom.equalTo(weakSelf.scanView);
+            }else if(i == 2){
+                make.top.equalTo(weakSelf.scanView.mas_bottom);
+                make.right.equalTo(weakSelf);
+                make.bottom.equalTo(weakSelf);
+                make.left.equalTo(weakSelf);
+            }else if(i == 3){
+                make.top.equalTo(weakSelf.scanView);
+                make.right.equalTo(weakSelf.scanView.mas_left);
+                make.bottom.equalTo(weakSelf.scanView);
+                make.left.equalTo(weakSelf);
+            }
+        }];
+    }
 }
 
 #pragma mark - 动画

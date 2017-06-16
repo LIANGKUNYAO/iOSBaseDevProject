@@ -32,6 +32,7 @@
 		B59DAAE71EE441A100E1873F /* UIImage+KYLECategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B59DAAE61EE441A100E1873F /* UIImage+KYLECategory.m */; };
 		B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3964B1EDA68050028626F /* HomeViewController.m */; };
 		B5F950F61EF0D29E00993C24 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F950F51EF0D29E00993C24 /* MessageUI.framework */; };
+		B5F950F81EF373F500993C24 /* alert.html in Resources */ = {isa = PBXBuildFile; fileRef = B5F950F71EF373F500993C24 /* alert.html */; };
 		D5E15AABFE482F6202B2DA5F /* libPods-iOSBaseDevProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F80DD83600D7B0AC4DAE6A3 /* libPods-iOSBaseDevProject.a */; };
 		FDA8C37E1060C2EEC5F8354E /* libPods-iOSBaseDevProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E687ED5FFD2ECD09F003D3FF /* libPods-iOSBaseDevProjectTests.a */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		B5D3964B1EDA68050028626F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B5D3964D1EDA68230028626F /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		B5F950F51EF0D29E00993C24 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		B5F950F71EF373F500993C24 /* alert.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = alert.html; sourceTree = "<group>"; };
 		BFF854E43775D97922CBD534 /* Pods-iOSBaseDevProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProjectUITests/Pods-iOSBaseDevProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D09C7E05883F62EC8620CDEA /* Pods-iOSBaseDevProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProjectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProjectTests/Pods-iOSBaseDevProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E6106434C2A6EC3DDABD8213 /* Pods-iOSBaseDevProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProject/Pods-iOSBaseDevProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				B5458B0E1EED4A21001D41F4 /* fonts */,
 				B5458B0F1EED4A21001D41F4 /* js */,
 				B598968A1EE83960008E7E5E /* index.html */,
+				B5F950F71EF373F500993C24 /* alert.html */,
 			);
 			path = WebContent;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				B55EB9691EF02A0E002F4F2A /* scanLine.png in Resources */,
 				B56A1B271EDB11A400D6BF69 /* bgRed.png in Resources */,
 				B59896941EE83960008E7E5E /* index.html in Resources */,
+				B5F950F81EF373F500993C24 /* alert.html in Resources */,
 				B55EB9681EF02A0E002F4F2A /* scanFrame.png in Resources */,
 				B5458B101EED4A21001D41F4 /* css in Resources */,
 				B57DE6641EDA615500705E38 /* LaunchScreen.storyboard in Resources */,

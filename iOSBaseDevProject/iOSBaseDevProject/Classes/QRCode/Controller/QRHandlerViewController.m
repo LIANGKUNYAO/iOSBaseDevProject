@@ -25,16 +25,30 @@
     [self.view addSubview:self.scanView];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [self.scanView startScan];
+}
+
 #pragma mark - Delegates
 - (void)scanView:(ScanView *)scanView ScanResult:(NSString *)result{
     [scanView stopScan];
+    [SVProgressHUD show];
     
-    NSRange range = [result rangeOfString:RegularExpressionURL options:NSRegularExpressionSearch];
-    if (range.location != NSNotFound) {
-        NSString *urlString = [result substringWithRange:range];
+    if ([result rangeOfString:RegularExpressionURL options:NSRegularExpressionSearch].location != NSNotFound) {
+        
+        NSRange urlRange = [result rangeOfString:RegularExpressionURL options:NSRegularExpressionSearch];
+        NSString *urlString = [result substringWithRange:urlRange];
         NSURL *url = [NSURL URLWithString:urlString];
+        
         NSData *xmlData = [NSData dataWithContentsOfURL:url];
         NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
+       
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        });
+        
         // 异常处理
         if (![MFMailComposeViewController canSendMail]) {
             [scanView startScan];
@@ -51,12 +65,14 @@
             // 显示控制器
             [self presentViewController:mailVc animated:YES completion:nil];
         }
+    }else{
+        [scanView startScan];
     }
 }
-//Email发送Controller回调
+
+//Email发送后回调
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
-    [self.scanView startScan];
 }
 
 

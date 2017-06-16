@@ -39,10 +39,10 @@
     //只设置导航栏标题
     self.navigationItem.title = @"首页";
     
-    __weak __typeof__(self) weakSelf = self;
     self.contentView = [self getScrollContentViewWithBgColor:0xF0F0F0];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    WeakSelf(weakSelf);
     [self.contentView addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.contentView);
@@ -63,8 +63,8 @@
 #pragma mark - UIs
 //ScrollView
 - (UIView *)getScrollContentViewWithBgColor:(int)bgColor{
-    __weak __typeof__(self) weakSelf = self;
     
+    WeakSelf(weakSelf);
     UIScrollView *scrollView = [[UIScrollView alloc]init];
     scrollView.backgroundColor = UIColorFromHex(bgColor);
     [self.view addSubview:scrollView];

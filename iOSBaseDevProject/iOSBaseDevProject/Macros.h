@@ -92,6 +92,8 @@
 #define StartTag CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
 #define EndTag  NSLog(@"Time: %f", CFAbsoluteTimeGetCurrent() - start)
 
+#define WeakSelf(weakSelf)      __weak __typeof(&*self)    weakSelf  = self
+#define StrongSelf(strongSelf)  __strong __typeof(&*self) strongSelf = weakSelf
 
 #define RegularExpressionURL @"[a-zA-z]+://[^\\s]*"
 
