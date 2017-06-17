@@ -20,7 +20,15 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"扫一扫";
-    self.scanView = [[ScanView alloc]initWithFrame:self.view.bounds];
+    self.scanView = [[ScanView alloc]initWithFrame:self.view.bounds scanSize:CGSizeMake(250, 250) initCallback:^(NSError *error) {
+        if(error){
+            NSString *errMsg = [error.userInfo objectForKey:@"NSLocalizedFailureReason"];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:errMsg preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    }];
     self.scanView.delegate = self;
     [self.view addSubview:self.scanView];
 }
@@ -30,7 +38,7 @@
 }
 
 #pragma mark - Delegates
-- (void)scanView:(ScanView *)scanView ScanResult:(NSString *)result{
+- (void)scanView:(ScanView *)scanView scanResult:(NSString *)result{
     [scanView stopScan];
     [SVProgressHUD show];
     
