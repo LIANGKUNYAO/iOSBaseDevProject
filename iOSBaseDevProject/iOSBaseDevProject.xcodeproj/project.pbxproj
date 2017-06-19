@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		26B4BF763C940D67A96A30BB /* libPods-iOSBaseDevProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B6DA87D92DF849C0A69E39 /* libPods-iOSBaseDevProjectUITests.a */; };
+		B504E51B1EF80482009AC7E2 /* qrScan.png in Resources */ = {isa = PBXBuildFile; fileRef = B504E51A1EF80482009AC7E2 /* qrScan.png */; };
 		B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53A22141EEAD9D50081DE7B /* WebViewController.m */; };
 		B5458B061EED07B6001D41F4 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5458B051EED07B6001D41F4 /* CardView.m */; };
 		B5458B101EED4A21001D41F4 /* css in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0D1EED4A21001D41F4 /* css */; };
@@ -59,6 +60,7 @@
 		7424E0454BBE95E31DBB31EE /* Pods-iOSBaseDevProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProject/Pods-iOSBaseDevProject.release.xcconfig"; sourceTree = "<group>"; };
 		7F80DD83600D7B0AC4DAE6A3 /* libPods-iOSBaseDevProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOSBaseDevProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8440A67ADE1CDF50C298FE0A /* Pods-iOSBaseDevProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProjectUITests/Pods-iOSBaseDevProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B504E51A1EF80482009AC7E2 /* qrScan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrScan.png; sourceTree = "<group>"; };
 		B53A22131EEAD9D50081DE7B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		B53A22141EEAD9D50081DE7B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		B5458B041EED07B6001D41F4 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		B56A1B251EDB11A400D6BF69 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				B504E51A1EF80482009AC7E2 /* qrScan.png */,
 				B56A1B261EDB11A400D6BF69 /* ekg.png */,
 			);
 			path = Public;
@@ -538,6 +541,7 @@
 				B57DE6641EDA615500705E38 /* LaunchScreen.storyboard in Resources */,
 				B57DE6611EDA615500705E38 /* Assets.xcassets in Resources */,
 				B57DE65F1EDA615500705E38 /* Main.storyboard in Resources */,
+				B504E51B1EF80482009AC7E2 /* qrScan.png in Resources */,
 				B5458B111EED4A21001D41F4 /* fonts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

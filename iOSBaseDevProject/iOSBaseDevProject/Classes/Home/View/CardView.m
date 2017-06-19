@@ -25,6 +25,7 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 0; //列间距
     layout.minimumLineSpacing = 0;      //行间距
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         //隐藏滑块
@@ -44,12 +45,12 @@
 #pragma Delegates
 //返回collection view里区(section)的个数，如果没有实现该方法，将默认返回1：
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 3;
+    return 1;
 }
 
 //返回指定区(section)包含的数据源条目数(number of items)，该方法必须实现：
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
+    return 10;
 }
 
 //返回某个indexPath对应的cell，该方法必须实现：
@@ -61,7 +62,7 @@
 
 //设定collectionView(指定区)的边距
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(6 ,6 ,6 ,6 );
+    return UIEdgeInsetsMake(1 ,1 ,1 ,1 );
 }
 
 //点击每个item实现的方法：

@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "UIImage+KYLECategory.h"
 #import "CardView.h"
+#import "QRHandlerViewController.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView* contentView;
@@ -20,24 +21,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //设置背景色
-    //self.view.backgroundColor = UIColorFromHex(0xF0F0F0);
-    //设置导航栏颜色
-    //self.navigationController.navigationBar.barTintColor = UIColorFromHex(0xBE0A14);
-    //self.navigationController.navigationBar.translucent = NO;
     
-    //通过设置barStyle来改变statusBar的字体颜色
-    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack]; //default UIBarStyleDefault
-    //设置导航栏背景为空
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    //去掉导航条底部横线
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    //设置导航栏字体
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //设置导航栏标题，同时改变tabBar中的文字
     //self.title = @"首页123";
     //只设置导航栏标题
-    self.navigationItem.title = @"首页";
+    [self.navigationItem setTitle:@"首页"];
+    UIBarButtonItem *rBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"qrScan"] style:UIBarButtonItemStylePlain target:self action:@selector(barItemOnClick:)];
+    [rBtn setTag:0];
+    [self.navigationItem setRightBarButtonItem:rBtn];
     
     self.contentView = [self getScrollContentViewWithBgColor:0xF0F0F0];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -56,8 +47,22 @@
         make.top.equalTo(weakSelf.headerView.mas_bottom);
         make.bottom.equalTo(weakSelf.contentView);
         make.left.right.equalTo(weakSelf.contentView);
-        make.height.mas_equalTo(800);
+        make.height.mas_equalTo(8000);
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    //[self.navigationController.navigationBar setTranslucent:YES];
+    //通过设置barStyle来改变statusBar的字体颜色
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack]; //default UIBarStyleDefault
+    //设置导航栏背景为空
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    //去掉导航条底部横线
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    //设置导航字体颜色
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //设置导航按钮颜色
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
 #pragma mark - UIs
@@ -105,6 +110,20 @@
     UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,y/100);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage jk_imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
     
+}
+
+#pragma mark - Private Methods
+- (void)barItemOnClick:(id)sender{
+    switch([sender tag]) {
+        case 0:{
+            QRHandlerViewController *vc = [[QRHandlerViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        default:{
+            NSLog(@"unknown button");
+        }
+    }
 }
 
 

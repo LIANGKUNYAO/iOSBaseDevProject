@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "HomeViewController.h"
 #import "WebViewController.h"
-#import "QRHandlerViewController.h"
 
 @interface ViewController ()
 
@@ -31,14 +30,6 @@
     WebViewController *webView = [[WebViewController alloc] init];
     webView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"ekg.png"] tag:1];
     [self addChildViewController:webView];
-    
-    
-    QRHandlerViewController *qrView = [[QRHandlerViewController alloc] init];
-    UINavigationController *nv2 = [[UINavigationController alloc] initWithRootViewController:qrView];
-    nv2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[UIImage imageNamed:@"ekg.png"] tag:1];
-    [self addChildViewController:nv2];
-    
-    
 }
 
 

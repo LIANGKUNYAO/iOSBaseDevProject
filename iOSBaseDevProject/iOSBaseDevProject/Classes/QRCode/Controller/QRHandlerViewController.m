@@ -9,6 +9,9 @@
 #import "QRHandlerViewController.h"
 #import "ScanView.h"
 #import <MessageUI/MessageUI.h>
+#import "UIImage+KYLECategory.h"
+
+#define MAILLIST @[@"liangkunyao@hotmail.com"]
 
 @interface QRHandlerViewController ()<ScanViewDelegate,MFMailComposeViewControllerDelegate,UIWebViewDelegate>
 @property (nonatomic, strong) ScanView* scanView;
@@ -19,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    //设置视图从(0,0)开始，而非(0,64)，即使导航条是不透明的
+    self.extendedLayoutIncludesOpaqueBars = YES;
     self.title = @"扫一扫";
     self.scanView = [[ScanView alloc]initWithFrame:self.view.bounds scanSize:CGSizeMake(250, 250) initCallback:^(NSError *error) {
         [self showError:error];
@@ -29,6 +34,17 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.scanView startScan];
+    //[self.navigationController.navigationBar setTranslucent:NO];
+    //通过设置barStyle来改变statusBar的字体颜色
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault]; //default UIBarStyleDefault
+    //设置导航栏背景为空
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage jk_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    //去掉导航条底部横线
+    [self.navigationController.navigationBar setShadowImage:nil];
+    //设置导航字体颜色
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    //设置导航按钮颜色
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
 }
 
 #pragma mark - Delegates
@@ -59,7 +75,7 @@
                         [SVProgressHUD dismiss];
                     });
                 });
-                [self sendEmailWithSubject:urlString message:htmlString recipients:@[@"liangkunyao@sdc.icbc.com.cn",@"wanggf@sdc.icbc.com.cn"]];
+                [self sendEmailWithSubject:urlString message:htmlString recipients:MAILLIST];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -91,7 +107,7 @@
             [SVProgressHUD dismiss];
         });
     });
-    [self sendEmailWithSubject:@"工商二维码扫描" message:htmlString recipients:@[@"liangkunyao@sdc.icbc.com.cn",@"wanggf@sdc.icbc.com.cn"]];
+    [self sendEmailWithSubject:@"工商二维码扫描" message:htmlString recipients:MAILLIST];
 }
 //Email发送后回调
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
