@@ -37,57 +37,61 @@
             [device setTorchMode:AVCaptureTorchModeAuto];
             [device unlockForConfiguration];
         }
-        //创建输出流
-        AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc]init];
-        //设置识别区域
-        output.rectOfInterest = CGRectMake((viewH - scanH)/2/viewH,
-                                           (viewW - scanW)/2/viewW,
-                                           scanH/viewH,
-                                           scanW/viewW);
-        //设置识别类型
-        NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
-            [array addObject:AVMetadataObjectTypeQRCode];
-        }
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN13Code]) {
-            [array addObject:AVMetadataObjectTypeEAN13Code];
-        }
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN8Code]) {
-            [array addObject:AVMetadataObjectTypeEAN8Code];
-        }
-        if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeCode128Code]) {
-            [array addObject:AVMetadataObjectTypeCode128Code];
-        }
-        [output setMetadataObjectTypes:array];
-        //设置代理
-        [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-        
+
         //创建输入流
         NSError *error = nil;
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-        if (input) {
+        //创建输出流
+        AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc]init];
+        
+        if (input && output) {
             //初始化连接对象
             self.session = [[AVCaptureSession alloc]init];
             //采集率
             self.session.sessionPreset = AVCaptureSessionPresetHigh;
-            
+            //添加输入流
             [self.session addInput:input];
+            //添加输出流
             [self.session addOutput:output];
-            [self.session startRunning];
             
+            //设置代理
+            [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+            //设置识别区域
+            output.rectOfInterest = CGRectMake((viewH - scanH)/2/viewH,
+                                               (viewW - scanW)/2/viewW,
+                                               scanH/viewH,
+                                               scanW/viewW);
+            //设置识别类型
+            NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
+                [array addObject:AVMetadataObjectTypeQRCode];
+            }
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN13Code]) {
+                [array addObject:AVMetadataObjectTypeEAN13Code];
+            }
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN8Code]) {
+                [array addObject:AVMetadataObjectTypeEAN8Code];
+            }
+            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeCode128Code]) {
+                [array addObject:AVMetadataObjectTypeCode128Code];
+            }
+            [output setMetadataObjectTypes:array];
+            
+            
+            [self.session startRunning];
             AVCaptureVideoPreviewLayer *layer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
             layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
             layer.frame = self.bounds;
             [self.layer insertSublayer:layer above:0];
+        }else{
+            if(initCallback){
+                initCallback(error);
+            }
         }
        
         [self initScanView:scanSize];
         [self initMaskView];
         [self initLoopView:scanSize];
-        
-        if(initCallback){
-            initCallback(error);
-        }
     }
     return self;
 }
