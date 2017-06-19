@@ -10,7 +10,7 @@
 #import "ScanView.h"
 #import <MessageUI/MessageUI.h>
 
-@interface QRHandlerViewController ()<ScanViewDelegate,MFMailComposeViewControllerDelegate>
+@interface QRHandlerViewController ()<ScanViewDelegate,MFMailComposeViewControllerDelegate,UIWebViewDelegate>
 @property (nonatomic, strong) ScanView* scanView;
 @end
 
@@ -21,13 +21,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"扫一扫";
     self.scanView = [[ScanView alloc]initWithFrame:self.view.bounds scanSize:CGSizeMake(250, 250) initCallback:^(NSError *error) {
-        if(error){
-            NSString *errMsg = [error.userInfo objectForKey:@"NSLocalizedFailureReason"];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:errMsg preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-            
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
+        [self showError:error];
     }];
     self.scanView.delegate = self;
     [self.view addSubview:self.scanView];
@@ -43,46 +37,97 @@
     [SVProgressHUD show];
     
     if ([result rangeOfString:RegularExpressionURL options:NSRegularExpressionSearch].location != NSNotFound) {
-        
         NSRange urlRange = [result rangeOfString:RegularExpressionURL options:NSRegularExpressionSearch];
         NSString *urlString = [result substringWithRange:urlRange];
-        NSURL *url = [NSURL URLWithString:urlString];
         
-        NSData *xmlData = [NSData dataWithContentsOfURL:url];
-        NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
-       
+        BOOL useWebview = NO;
+        if(useWebview){
+            UIWebView* webView = [[UIWebView alloc] init];
+            [self.view addSubview:webView];
+            webView.delegate = self;
+            NSURL *url = [NSURL URLWithString:urlString];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [webView loadRequest:request];
+        }else{
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html", nil]];
+            [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                NSString *htmlString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [SVProgressHUD dismiss];
+                    });
+                });
+                [self sendEmailWithSubject:urlString message:htmlString recipients:@[@"liangkunyao@sdc.icbc.com.cn",@"wanggf@sdc.icbc.com.cn"]];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [SVProgressHUD dismiss];
+                    });
+                });
+                [self showError:error];
+            }];
+        }
+    }else{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
             });
         });
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"无法识别的二维码格式" forKey:NSLocalizedDescriptionKey];
+        NSString *BundleId = BundleValue(@"CFBundleIdentifier");
+        NSError *error = [NSError errorWithDomain:BundleId code:-1 userInfo:userInfo];
         
-        // 异常处理
-        if (![MFMailComposeViewController canSendMail]) {
-            [scanView startScan];
-        }else{
-            MFMailComposeViewController *mailVc = [[MFMailComposeViewController alloc] init];
-            // 设置邮件主题
-            [mailVc setSubject:result];
-            // 设置邮件内容
-            [mailVc setMessageBody:xmlString isHTML:NO];
-            // 设置收件人列表
-            [mailVc setToRecipients:@[@"liangkunyao@hotmail.com"]];
-            // 设置代理
-            mailVc.mailComposeDelegate = self;
-            // 显示控制器
-            [self presentViewController:mailVc animated:YES completion:nil];
-        }
-    }else{
-        [scanView startScan];
+        [self showError:error];
     }
 }
-
+//webview加载完成后的回调
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    NSString *JsToGetHTMLSource = @"document.body.innerHTML";
+    NSString *htmlString = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    });
+    [self sendEmailWithSubject:@"工商二维码扫描" message:htmlString recipients:@[@"liangkunyao@sdc.icbc.com.cn",@"wanggf@sdc.icbc.com.cn"]];
+}
 //Email发送后回调
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Private Methods
+- (void)sendEmailWithSubject:(NSString *)subject message:(NSString *)message recipients:(NSArray *)recipients{
+    if (![MFMailComposeViewController canSendMail]) {
+        [self.scanView startScan];
+    }else{
+        MFMailComposeViewController *mailVc = [[MFMailComposeViewController alloc] init];
+        // 设置邮件主题
+        [mailVc setSubject:subject];
+        // 设置邮件内容
+        [mailVc setMessageBody:message isHTML:NO];
+        // 设置收件人列表
+        [mailVc setToRecipients:recipients];
+        // 设置代理
+        mailVc.mailComposeDelegate = self;
+        // 显示控制器
+        [self presentViewController:mailVc animated:YES completion:nil];
+    }
+}
+- (void)showError:(NSError *)error{
+    if(error){
+        NSString *errMsg = [error localizedDescription];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:errMsg preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.scanView startScan];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }else{
+        [self.scanView startScan];
+    }
+}
 
 #pragma mark - LifeCycles
 - (void)didReceiveMemoryWarning {

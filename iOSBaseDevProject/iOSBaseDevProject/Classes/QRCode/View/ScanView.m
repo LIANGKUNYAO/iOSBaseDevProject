@@ -31,12 +31,12 @@
         //获取摄像设备
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         //闪光灯
-        if ([device hasFlash] && [device hasTorch]) {
-            [device lockForConfiguration:nil];
-            [device setFlashMode:AVCaptureFlashModeAuto];
-            [device setTorchMode:AVCaptureTorchModeAuto];
-            [device unlockForConfiguration];
-        }
+//        if ([device hasFlash] && [device hasTorch]) {
+//            [device lockForConfiguration:nil];
+//            [device setFlashMode:AVCaptureFlashModeOn];
+//            [device setTorchMode:AVCaptureTorchModeAuto];
+//            [device unlockForConfiguration];
+//        }
 
         //创建输入流
         NSError *error = nil;
@@ -44,7 +44,7 @@
         //创建输出流
         AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc]init];
         
-        if (input && output) {
+        if (!error) {
             //初始化连接对象
             self.session = [[AVCaptureSession alloc]init];
             //采集率

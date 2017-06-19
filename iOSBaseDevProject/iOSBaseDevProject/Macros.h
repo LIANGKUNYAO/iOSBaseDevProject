@@ -95,5 +95,7 @@
 #define WeakSelf(weakSelf)      __weak __typeof(&*self)    weakSelf  = self
 #define StrongSelf(strongSelf)  __strong __typeof(&*self) strongSelf = weakSelf
 
+#define BundleValue(value) [[NSBundle mainBundle] objectForInfoDictionaryKey:value];
+
 #define RegularExpressionURL @"[a-zA-z]+://[^\\s]*"
 
