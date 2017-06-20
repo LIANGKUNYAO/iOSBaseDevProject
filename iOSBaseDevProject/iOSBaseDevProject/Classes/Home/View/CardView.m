@@ -7,6 +7,8 @@
 //
 
 #import "CardView.h"
+#import "FinanceInfo.h"
+#import "FinanceCellView.h"
 
 @interface CardView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -23,8 +25,9 @@
 */
 - (instancetype)initWithFrame:(CGRect)frame{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.minimumInteritemSpacing = 0; //列间距
-    layout.minimumLineSpacing = 0;      //行间距
+    layout.itemSize = CGSizeMake(110, 90);
+    layout.minimumLineSpacing = 10;
+    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
@@ -37,7 +40,7 @@
         //设置背景颜色（默认黑色）
         self.backgroundColor = [UIColor whiteColor];
         //注册单元格
-        [self registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"reuseId"];
+        [self registerClass:[FinanceCellView class] forCellWithReuseIdentifier:@"reuseIdentifier"];
     }
     return self;
 }
@@ -47,27 +50,23 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
-
 //返回指定区(section)包含的数据源条目数(number of items)，该方法必须实现：
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 10;
+    return self.viewData.count;
 }
-
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    FinanceInfo *model = [self.viewData objectAtIndex:indexPath.row];
+    [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
+}
 //返回某个indexPath对应的cell，该方法必须实现：
-- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell =  [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseId" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor blackColor];
-    return cell;
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
 }
-
-//设定collectionView(指定区)的边距
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(1 ,1 ,1 ,1 );
-}
-
 //点击每个item实现的方法：
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"selected");
+    if (self.onTapBlock) {
+        self.onTapBlock(indexPath);
+    }
 }
 
 @end

@@ -10,5 +10,11 @@
 
 @interface CardView : UICollectionView
 
+/**
+ *  Callback Function : Handle the Click Event
+ */
+@property (nonatomic, copy) void (^onTapBlock)(NSIndexPath * indexPath);
+
+@property (nonatomic, copy) NSArray *viewData;
 
 @end

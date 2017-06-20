@@ -10,10 +10,12 @@
 #import "UIImage+KYLECategory.h"
 #import "CardView.h"
 #import "QRHandlerViewController.h"
+#import "FinanceInfo.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView* contentView;
 @property (nonatomic, strong) UIImageView* headerView;
+@property (nonatomic, strong) NSMutableArray *financeArray;
 @end
 
 @implementation HomeViewController
@@ -43,12 +45,26 @@
     }];
     
     CardView *view = [[CardView alloc]initWithFrame:CGRectZero];
+    
+    self.financeArray = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 0; i < 10; i++) {
+        FinanceInfo *model = [[FinanceInfo alloc]init];
+        model.prodid = [NSString stringWithFormat:@"%d",i];
+        model.title = [NSString stringWithFormat:@"产品%d",i];
+        model.rate = @"3.50%";
+        model.tags = @[@"增值",@"保本",@"爱国"];
+        [self.financeArray addObject:model];
+    }
+    [view setViewData:self.financeArray];
+    [view setOnTapBlock:^(NSIndexPath *indexPath){
+        NSLog(@"%ld",(long)indexPath.row);
+    }];
     [self.contentView addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.headerView.mas_bottom);
         make.bottom.equalTo(weakSelf.contentView);
         make.left.right.equalTo(weakSelf.contentView);
-        make.height.mas_equalTo(8000);
+        make.height.mas_equalTo(110);
     }];
 }
 
