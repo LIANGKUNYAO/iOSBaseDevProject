@@ -26,7 +26,8 @@
     //self.title = @"首页123";
     //只设置导航栏标题
     [self.navigationItem setTitle:@"首页"];
-    UIBarButtonItem *rBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"qrScan"] style:UIBarButtonItemStylePlain target:self action:@selector(barItemOnClick:)];
+    UIImage *rBtnImage = [[UIImage imageNamed:@"qrScan"] imageWithScale:0.2];
+    UIBarButtonItem *rBtn = [[UIBarButtonItem alloc]initWithImage:rBtnImage style:UIBarButtonItemStylePlain target:self action:@selector(barItemOnClick:)];
     [rBtn setTag:0];
     [self.navigationItem setRightBarButtonItem:rBtn];
     
@@ -108,7 +109,7 @@
     scrollView.bounces = (y <= 0) ? NO : YES;
     //向下时设置导航栏颜色
     UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,y/100);
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage jk_imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
     
 }
 

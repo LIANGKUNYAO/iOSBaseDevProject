@@ -10,11 +10,13 @@
 #import "ScanView.h"
 #import <MessageUI/MessageUI.h>
 #import "UIImage+KYLECategory.h"
+#import "KyleURLProtocol.h"
 
 #define MAILLIST @[@"liangkunyao@hotmail.com"]
 
 @interface QRHandlerViewController ()<ScanViewDelegate,MFMailComposeViewControllerDelegate,UIWebViewDelegate>
 @property (nonatomic, strong) ScanView* scanView;
+@property (nonatomic, strong) UIBarButtonItem* torchBtn;
 @end
 
 @implementation QRHandlerViewController
@@ -25,26 +27,35 @@
     //设置视图从(0,0)开始，而非(0,64)，即使导航条是不透明的
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.title = @"扫一扫";
+    UIImage *torchImg = [[UIImage imageNamed:@"torch_on"] imageWithScale:0.2];
+    self.torchBtn = [[UIBarButtonItem alloc]initWithImage:torchImg style:UIBarButtonItemStylePlain target:self action:@selector(barItemOnClick:)];
+    [self.torchBtn setTag:0];
+    [self.navigationItem setRightBarButtonItem:self.torchBtn];
+    
     self.scanView = [[ScanView alloc]initWithFrame:self.view.bounds scanSize:CGSizeMake(250, 250) initCallback:^(NSError *error) {
         [self showError:error];
     }];
     self.scanView.delegate = self;
     [self.view addSubview:self.scanView];
 }
-
 - (void)viewWillAppear:(BOOL)animated{
     [self.scanView startScan];
     //[self.navigationController.navigationBar setTranslucent:NO];
     //通过设置barStyle来改变statusBar的字体颜色
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault]; //default UIBarStyleDefault
     //设置导航栏背景为空
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage jk_imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     //去掉导航条底部横线
     [self.navigationController.navigationBar setShadowImage:nil];
     //设置导航字体颜色
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     //设置导航按钮颜色
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    
+    [NSURLProtocol registerClass:[KyleURLProtocol class]];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [NSURLProtocol unregisterClass:[KyleURLProtocol class]];
 }
 
 #pragma mark - Delegates
@@ -56,7 +67,7 @@
         NSRange urlRange = [result rangeOfString:RegularExpressionURL options:NSRegularExpressionSearch];
         NSString *urlString = [result substringWithRange:urlRange];
         
-        BOOL useWebview = NO;
+        BOOL useWebview = YES;
         if(useWebview){
             UIWebView* webView = [[UIWebView alloc] init];
             [self.view addSubview:webView];
@@ -107,8 +118,18 @@
             [SVProgressHUD dismiss];
         });
     });
-    [self sendEmailWithSubject:@"工商二维码扫描" message:htmlString recipients:MAILLIST];
+    NSString *search = @"https://www.sgs.gov.cn/notice/query/queryEntInfoMain.do";
+    NSString *mstr = webView.request.URL.absoluteString;
+    NSRange substr = [mstr rangeOfString:search];
+    if (substr.location == NSNotFound) {
+        [self sendEmailWithSubject:webView.request.URL.absoluteString message:htmlString recipients:MAILLIST];
+    }
 }
+//webview加载前的回调
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    return YES;
+}
+
 //Email发送后回调
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
@@ -142,6 +163,25 @@
         [self presentViewController:alertController animated:YES completion:nil];
     }else{
         [self.scanView startScan];
+    }
+}
+- (void)barItemOnClick:(id)sender{
+    switch([sender tag]) {
+        case 0:{
+            [self.scanView startTorch];
+            [self.torchBtn setImage:[[UIImage imageNamed:@"torch_off"] imageWithScale:0.2]];
+            [self.torchBtn setTag:1];
+            break;
+        }
+        case 1:{
+            [self.scanView stopTorch];
+            [self.torchBtn setImage:[[UIImage imageNamed:@"torch_on"] imageWithScale:0.2]];
+            [self.torchBtn setTag:0];
+            break;
+        }
+        default:{
+            NSLog(@"unknown button");
+        }
     }
 }
 

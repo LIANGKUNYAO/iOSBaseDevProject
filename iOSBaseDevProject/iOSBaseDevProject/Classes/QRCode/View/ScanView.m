@@ -6,9 +6,10 @@
 //  Copyright © 2017年 梁坤尧. All rights reserved.
 //
 #import "ScanView.h"
+#import <ImageIO/ImageIO.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface ScanView ()<AVCaptureMetadataOutputObjectsDelegate>
+@interface ScanView ()<AVCaptureMetadataOutputObjectsDelegate,AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *session;
 @property (nonatomic, strong) UIImageView *scanView;
@@ -30,19 +31,13 @@
         
         //获取摄像设备
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        //闪光灯
-//        if ([device hasFlash] && [device hasTorch]) {
-//            [device lockForConfiguration:nil];
-//            [device setFlashMode:AVCaptureFlashModeOn];
-//            [device setTorchMode:AVCaptureTorchModeAuto];
-//            [device unlockForConfiguration];
-//        }
 
         //创建输入流
         NSError *error = nil;
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
         //创建输出流
-        AVCaptureMetadataOutput *output = [[AVCaptureMetadataOutput alloc]init];
+        AVCaptureMetadataOutput *mdOutput = [[AVCaptureMetadataOutput alloc]init];
+        AVCaptureVideoDataOutput *vdOutput = [[AVCaptureVideoDataOutput alloc] init];
         
         if (!error) {
             //初始化连接对象
@@ -52,30 +47,33 @@
             //添加输入流
             [self.session addInput:input];
             //添加输出流
-            [self.session addOutput:output];
+            [self.session addOutput:mdOutput];
+            [self.session addOutput:vdOutput];
             
             //设置代理
-            [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+            [mdOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+            [vdOutput setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
+
             //设置识别区域
-            output.rectOfInterest = CGRectMake((viewH - scanH)/2/viewH,
+            mdOutput.rectOfInterest = CGRectMake((viewH - scanH)/2/viewH,
                                                (viewW - scanW)/2/viewW,
                                                scanH/viewH,
                                                scanW/viewW);
             //设置识别类型
             NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
+            if ([mdOutput.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
                 [array addObject:AVMetadataObjectTypeQRCode];
             }
-            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN13Code]) {
+            if ([mdOutput.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN13Code]) {
                 [array addObject:AVMetadataObjectTypeEAN13Code];
             }
-            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN8Code]) {
+            if ([mdOutput.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeEAN8Code]) {
                 [array addObject:AVMetadataObjectTypeEAN8Code];
             }
-            if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeCode128Code]) {
+            if ([mdOutput.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeCode128Code]) {
                 [array addObject:AVMetadataObjectTypeCode128Code];
             }
-            [output setMetadataObjectTypes:array];
+            [mdOutput setMetadataObjectTypes:array];
             
             
             [self.session startRunning];
@@ -175,6 +173,10 @@
         [weakSelf loopLine:depth];
     }];
 }
+- (void)initLightView{
+    
+}
+
 
 #pragma mark - Delegates
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
@@ -185,16 +187,38 @@
         }
     }
 }
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+//    CFDictionaryRef metadataDict = CMCopyDictionaryOfAttachments(NULL,sampleBuffer, kCMAttachmentMode_ShouldPropagate);
+//    NSDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:(__bridge NSDictionary*)metadataDict];
+//    CFRelease(metadataDict);
+//    NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];
+//    float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];
+}
 
 #pragma mark - Interface
 - (void)startScan{
     _loopView.hidden = NO;
     [self.session startRunning];
 }
-
 - (void)stopScan{
     _loopView.hidden = YES;
     [self.session stopRunning];
+}
+- (void)startTorch{
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if([device hasTorch]){
+        [device lockForConfiguration:nil];
+        [device setTorchMode: AVCaptureTorchModeOn];//开
+        [device unlockForConfiguration];
+    }
+}
+- (void)stopTorch{
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if([device hasTorch]){
+        [device lockForConfiguration:nil];
+        [device setTorchMode: AVCaptureTorchModeOff];//关
+        [device unlockForConfiguration];
+    }
 }
 
 @end
