@@ -54,13 +54,17 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.viewData.count;
 }
+
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    FinanceInfo *model = [self.viewData objectAtIndex:indexPath.row];
-    [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
+//    FinanceInfo *model = [self.viewData objectAtIndex:indexPath.row];
+//    [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
 }
 //返回某个indexPath对应的cell，该方法必须实现：
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
+    FinanceCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
+    FinanceInfo *model = [self.viewData objectAtIndex:indexPath.row];
+    [cell setCellTitle:model.title tags:model.tags withRate:model.rate];
+    return cell;
 }
 //点击每个item实现的方法：
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

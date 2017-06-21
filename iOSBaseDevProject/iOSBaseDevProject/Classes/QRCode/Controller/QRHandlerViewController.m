@@ -27,7 +27,7 @@
     //设置视图从(0,0)开始，而非(0,64)，即使导航条是不透明的
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.title = @"扫一扫";
-    UIImage *torchImg = [[UIImage imageNamed:@"torch_on"] imageWithSize:CGSizeMake(20, 20)];
+    UIImage *torchImg = [[UIImage imageNamed:@"torch_on"] imageWithSize:SquareSize20];
     self.torchBtn = [[UIBarButtonItem alloc]initWithImage:torchImg style:UIBarButtonItemStylePlain target:self action:@selector(barItemOnClick:)];
     [self.torchBtn setTag:0];
     [self.navigationItem setRightBarButtonItem:self.torchBtn];
@@ -51,6 +51,8 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     //设置导航按钮颜色
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
+    
+    [self.tabBarController.tabBar setHidden:YES];
     
     [NSURLProtocol registerClass:[KyleURLProtocol class]];
 }
@@ -168,13 +170,13 @@
     switch([sender tag]) {
         case 0:{
             [self.scanView startTorch];
-            [self.torchBtn setImage:[[UIImage imageNamed:@"torch_off"] imageWithSize:CGSizeMake(20, 20)]];
+            [self.torchBtn setImage:[[UIImage imageNamed:@"torch_off"] imageWithSize:SquareSize20]];
             [self.torchBtn setTag:1];
             break;
         }
         case 1:{
             [self.scanView stopTorch];
-            [self.torchBtn setImage:[[UIImage imageNamed:@"torch_on"] imageWithSize:CGSizeMake(20, 20)]];
+            [self.torchBtn setImage:[[UIImage imageNamed:@"torch_on"] imageWithSize:SquareSize20]];
             [self.torchBtn setTag:0];
             break;
         }

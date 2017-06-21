@@ -98,4 +98,5 @@
 #define BundleValue(value) [[NSBundle mainBundle] objectForInfoDictionaryKey:value];
 
 #define RegularExpressionURL @"[a-zA-z]+://[^\\s]*"
+#define SquareSize20 CGSizeMake(20, 20)
 

@@ -28,9 +28,8 @@
     //self.title = @"首页123";
     //只设置导航栏标题
     [self.navigationItem setTitle:@"首页"];
-    UIImage *rBtnImage = [[UIImage imageNamed:@"qrScan"] imageWithSize:CGSizeMake(20, 20)];
+    UIImage *rBtnImage = [[UIImage imageNamed:@"qrScan"] imageWithSize:SquareSize20];
     UIBarButtonItem *rBtn = [[UIBarButtonItem alloc]initWithImage:rBtnImage style:UIBarButtonItemStylePlain target:self action:@selector(barItemOnClick:)];
-    
     [rBtn setTag:0];
     [self.navigationItem setRightBarButtonItem:rBtn];
     
@@ -55,6 +54,7 @@
         model.tags = @[@"增值",@"保本",@"爱国"];
         [self.financeArray addObject:model];
     }
+    
     [financeView setViewData:self.financeArray];
     [financeView setOnTapBlock:^(NSIndexPath *indexPath){
         NSLog(@"%ld",(long)indexPath.row);
@@ -80,12 +80,13 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //设置导航按钮颜色
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 #pragma mark - UIs
 //ScrollView
 - (UIView *)getScrollContentViewWithBgColor:(int)bgColor{
-    
     WeakSelf(weakSelf);
     UIScrollView *scrollView = [[UIScrollView alloc]init];
     scrollView.backgroundColor = UIColorFromHex(bgColor);
@@ -99,10 +100,8 @@
     [scrollView addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.left.equalTo(scrollView);
-        //留出部分冗余
-        make.bottom.equalTo(scrollView).with.offset(-64);
-        //水平方向不滚动
-        make.width.equalTo(scrollView);
+        make.bottom.equalTo(scrollView).with.offset(-64);   //留出部分冗余
+        make.width.equalTo(scrollView);                     //水平方向不滚动
     }];
     return contentView;
 }
@@ -116,17 +115,14 @@
     return _headerView;
 }
 
-
 #pragma mark - Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat y = scrollView.contentOffset.y;
-    
     //禁止向上延伸
     scrollView.bounces = (y <= 0) ? NO : YES;
     //向下时设置导航栏颜色
     UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,y/100);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
-    
 }
 
 #pragma mark - Private Methods
