@@ -14,9 +14,8 @@
 */
 + (UIImage *)imageWithColor:(UIColor *)color;
 
-/*
-    @brief   等比率缩放
-*/
-- (UIImage *)imageWithScale:(float)scaleSize;
-
+/* 缩放到指定比率 */
+- (UIImage *)imageWithScale:(float)scale;
+/* 缩放到指定大小 */
+- (UIImage *)imageWithSize:(CGSize)size;
 @end

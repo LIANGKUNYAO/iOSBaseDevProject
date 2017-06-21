@@ -28,8 +28,9 @@
     //self.title = @"首页123";
     //只设置导航栏标题
     [self.navigationItem setTitle:@"首页"];
-    UIImage *rBtnImage = [[UIImage imageNamed:@"qrScan"] imageWithScale:0.2];
+    UIImage *rBtnImage = [[UIImage imageNamed:@"qrScan"] imageWithSize:CGSizeMake(20, 20)];
     UIBarButtonItem *rBtn = [[UIBarButtonItem alloc]initWithImage:rBtnImage style:UIBarButtonItemStylePlain target:self action:@selector(barItemOnClick:)];
+    
     [rBtn setTag:0];
     [self.navigationItem setRightBarButtonItem:rBtn];
     
@@ -44,8 +45,7 @@
         make.height.mas_equalTo(250);
     }];
     
-    CardView *view = [[CardView alloc]initWithFrame:CGRectZero];
-    
+    CardView *financeView = [[CardView alloc]initWithFrame:CGRectZero];
     self.financeArray = [NSMutableArray arrayWithCapacity:0];
     for (int i = 0; i < 10; i++) {
         FinanceInfo *model = [[FinanceInfo alloc]init];
@@ -55,12 +55,12 @@
         model.tags = @[@"增值",@"保本",@"爱国"];
         [self.financeArray addObject:model];
     }
-    [view setViewData:self.financeArray];
-    [view setOnTapBlock:^(NSIndexPath *indexPath){
+    [financeView setViewData:self.financeArray];
+    [financeView setOnTapBlock:^(NSIndexPath *indexPath){
         NSLog(@"%ld",(long)indexPath.row);
     }];
-    [self.contentView addSubview:view];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView addSubview:financeView];
+    [financeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.headerView.mas_bottom);
         make.bottom.equalTo(weakSelf.contentView);
         make.left.right.equalTo(weakSelf.contentView);
