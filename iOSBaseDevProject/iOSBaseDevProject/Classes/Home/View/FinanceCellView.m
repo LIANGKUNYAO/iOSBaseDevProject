@@ -92,8 +92,8 @@
     
     [self.titleLb setText:title];
     
-    [self.tagView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     NSUInteger length = tags.count;
+    [self.tagView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     for(int i = 0 ; i < length ; i++){
         UILabel *tagLb = [[UILabel alloc]init];
         [tagLb setFont:[UIFont systemFontOfSize:8]];

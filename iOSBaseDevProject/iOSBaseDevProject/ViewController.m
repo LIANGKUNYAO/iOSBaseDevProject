@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "HomeViewController.h"
 #import "WebViewController.h"
+#import "UIImage+KYLECategory.h"
 
 @interface ViewController ()
 
@@ -24,11 +25,13 @@
     HomeViewController *homeView = [[HomeViewController alloc] init];
     UINavigationController *nv1 = [[UINavigationController alloc] initWithRootViewController:homeView];
     // 标签栏图标
-    nv1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"ekg.png"] tag:0];
+    UIImage *homeImage = [[UIImage imageNamed:@"home"] imageWithSize:SquareSize20];
+    nv1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:homeImage tag:0];
     [self addChildViewController:nv1];
     
     WebViewController *webView = [[WebViewController alloc] init];
-    webView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"ekg.png"] tag:1];
+    UIImage *userImage = [[UIImage imageNamed:@"profile"] imageWithSize:SquareSize20];
+    webView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:userImage tag:1];
     [self addChildViewController:webView];
 }
 
