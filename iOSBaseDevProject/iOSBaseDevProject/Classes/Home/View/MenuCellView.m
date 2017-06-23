@@ -58,8 +58,7 @@
     return self;
 }
 
-#pragma mark - Public Method
-
+#pragma mark - Interface
 - (void)setCellTitle:(NSString *)title withImage:(UIImage *)img{
     self.titleLb.text = title;
     self.iconView.image = img;

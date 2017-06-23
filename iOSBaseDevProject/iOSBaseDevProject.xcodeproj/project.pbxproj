@@ -15,7 +15,7 @@
 		B504E5301EF913E7009AC7E2 /* FinanceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B504E52F1EF913E7009AC7E2 /* FinanceInfo.m */; };
 		B504E5331EF91452009AC7E2 /* FinanceCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B504E5321EF91452009AC7E2 /* FinanceCellView.m */; };
 		B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B53A22141EEAD9D50081DE7B /* WebViewController.m */; };
-		B5458B061EED07B6001D41F4 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5458B051EED07B6001D41F4 /* CardView.m */; };
+		B5458B061EED07B6001D41F4 /* KyleCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5458B051EED07B6001D41F4 /* KyleCollectionView.m */; };
 		B5458B101EED4A21001D41F4 /* css in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0D1EED4A21001D41F4 /* css */; };
 		B5458B111EED4A21001D41F4 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0E1EED4A21001D41F4 /* fonts */; };
 		B5458B121EED4A21001D41F4 /* js in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0F1EED4A21001D41F4 /* js */; };
@@ -77,8 +77,8 @@
 		B504E5321EF91452009AC7E2 /* FinanceCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinanceCellView.m; sourceTree = "<group>"; };
 		B53A22131EEAD9D50081DE7B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		B53A22141EEAD9D50081DE7B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		B5458B041EED07B6001D41F4 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
-		B5458B051EED07B6001D41F4 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		B5458B041EED07B6001D41F4 /* KyleCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KyleCollectionView.h; sourceTree = "<group>"; };
+		B5458B051EED07B6001D41F4 /* KyleCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KyleCollectionView.m; sourceTree = "<group>"; };
 		B5458B0D1EED4A21001D41F4 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
 		B5458B0E1EED4A21001D41F4 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B5458B0F1EED4A21001D41F4 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
@@ -436,8 +436,8 @@
 		B5D396491EDA67EB0028626F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B5458B041EED07B6001D41F4 /* CardView.h */,
-				B5458B051EED07B6001D41F4 /* CardView.m */,
+				B5458B041EED07B6001D41F4 /* KyleCollectionView.h */,
+				B5458B051EED07B6001D41F4 /* KyleCollectionView.m */,
 				B5F00EBC1EFB992A005A4003 /* MenuCellView.h */,
 				B5F00EBD1EFB992A005A4003 /* MenuCellView.m */,
 				B504E5311EF91452009AC7E2 /* FinanceCellView.h */,
@@ -752,7 +752,7 @@
 				B57DE6561EDA615500705E38 /* main.m in Sources */,
 				B55EB95E1EF02643002F4F2A /* ScanView.m in Sources */,
 				B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */,
-				B5458B061EED07B6001D41F4 /* CardView.m in Sources */,
+				B5458B061EED07B6001D41F4 /* KyleCollectionView.m in Sources */,
 				B504E5331EF91452009AC7E2 /* FinanceCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

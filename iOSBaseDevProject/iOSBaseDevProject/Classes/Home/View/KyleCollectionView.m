@@ -1,20 +1,18 @@
 //
-//  CardView.m
+//  KyleCollectionView.m
 //  iOSBaseDevProject
 //
 //  Created by 梁坤尧 on 2017/6/11.
 //  Copyright © 2017年 梁坤尧. All rights reserved.
 //
 
-#import "CardView.h"
-#import "FinanceInfo.h"
-#import "FinanceCellView.h"
+#import "KyleCollectionView.h"
 
-@interface CardView ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface KyleCollectionView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 
 @end
 
-@implementation CardView
+@implementation KyleCollectionView
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -34,8 +32,8 @@
     return self;
 }
 #pragma Interfaces
-- (void)setCellClassName:(NSString *)cellClassName{
-    [self registerClass:NSClassFromString(cellClassName) forCellWithReuseIdentifier:@"reuseIdentifier"];
+- (void)setCellClass:(Class)class{
+    [self registerClass:class forCellWithReuseIdentifier:@"reuseIdentifier"];
 }
 
 #pragma Delegates
@@ -53,13 +51,14 @@
 }
 //willDisplayCell
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    FinanceInfo *model = [[self.viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
+    if (self.willDisplayCell) {
+        self.willDisplayCell(collectionView,cell,indexPath,self.viewData);
+    }
 }
 //didSelectItemAtIndexPath
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.onTapBlock) {
-        self.onTapBlock(indexPath);
+    if (self.didSelectItem) {
+        self.didSelectItem(indexPath);
     }
 }
 

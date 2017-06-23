@@ -8,9 +8,10 @@
 
 #import "HomeViewController.h"
 #import "UIImage+KYLECategory.h"
-#import "CardView.h"
+#import "KyleCollectionView.h"
 #import "QRHandlerViewController.h"
 #import "FinanceInfo.h"
+#import "FinanceCellView.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView* contentView;
@@ -43,25 +44,29 @@
         make.height.mas_equalTo(250);
     }];
     
-    CardView *financeView = [[CardView alloc]initWithFrame:CGRectZero];
-    [financeView setShowsVerticalScrollIndicator:NO];
-    [financeView setShowsHorizontalScrollIndicator:NO];
-    [financeView setCellClassName:@"FinanceCellView"];
+    KyleCollectionView *financeView = [[KyleCollectionView alloc]initWithFrame:CGRectZero];
     [financeView.layout setItemSize:CGSizeMake(110, 90)];
     [financeView.layout setMinimumLineSpacing:10];
     [financeView.layout setSectionInset:UIEdgeInsetsMake(0, 10, 0, 10)];
     [financeView.layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    NSArray *viewData = [self getFinanceData];
-    [financeView setViewData:viewData];
-    [financeView setOnTapBlock:^(NSIndexPath *indexPath){
+    
+    [financeView setShowsVerticalScrollIndicator:NO];
+    [financeView setShowsHorizontalScrollIndicator:NO];
+    [financeView setCellClass:[FinanceCellView class]];
+    [financeView setViewData:[self getFinanceData]];
+    [financeView setDidSelectItem:^(NSIndexPath *indexPath){
         NSLog(@"%ld",(long)indexPath.row);
+    }];
+    [financeView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
+        FinanceInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
     }];
     [self.contentView addSubview:financeView];
     [financeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.headerView.mas_bottom);
-        make.bottom.equalTo(weakSelf.contentView);
         make.left.right.equalTo(weakSelf.contentView);
         make.height.mas_equalTo(110);
+        make.bottom.equalTo(weakSelf.contentView);
     }];
 }
 

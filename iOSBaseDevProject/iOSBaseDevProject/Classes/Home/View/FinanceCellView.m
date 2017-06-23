@@ -100,7 +100,7 @@
         [tagLb setText:tags[i]];
         [tagLb setTextColor:UIColorFromHex(0xC70000)];
         [tagLb setTextAlignment:NSTextAlignmentCenter];
-        tagLb.layer.cornerRadius = 2.5;
+        tagLb.layer.cornerRadius = 2.5f;
         tagLb.layer.borderColor = [UIColorFromHex(0xC70000) CGColor];
         tagLb.layer.borderWidth = 0.5f;
         [self.tagView addSubview:tagLb];
