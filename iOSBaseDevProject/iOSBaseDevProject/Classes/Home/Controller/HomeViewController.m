@@ -45,6 +45,11 @@
     }];
     
     CardView *financeView = [[CardView alloc]initWithFrame:CGRectZero];
+    [financeView setCellClassName:@"FinanceCellView"];
+    [financeView.layout setItemSize:CGSizeMake(110, 90)];
+    [financeView.layout setMinimumLineSpacing:10];
+    [financeView.layout setSectionInset:UIEdgeInsetsMake(0, 10, 0, 10)];
+    [financeView.layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     self.financeArray = [NSMutableArray arrayWithCapacity:0];
     for (int i = 0; i < 10; i++) {
         FinanceInfo *model = [[FinanceInfo alloc]init];

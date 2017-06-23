@@ -24,12 +24,8 @@
 }
 */
 - (instancetype)initWithFrame:(CGRect)frame{
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(110, 90);
-    layout.minimumLineSpacing = 10;
-    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self = [super initWithFrame:frame collectionViewLayout:layout];
+    self.layout = [[UICollectionViewFlowLayout alloc] init];
+    self = [super initWithFrame:frame collectionViewLayout:_layout];
     if (self) {
         //隐藏滑块
         self.showsHorizontalScrollIndicator = NO;
@@ -39,11 +35,14 @@
         self.dataSource = self;
         //设置背景颜色（默认黑色）
         self.backgroundColor = [UIColor whiteColor];
-        //注册单元格
-        [self registerClass:[FinanceCellView class] forCellWithReuseIdentifier:@"reuseIdentifier"];
     }
     return self;
 }
+#pragma Interfaces
+- (void)setCellClassName:(NSString *)cellClassName{
+    [self registerClass:NSClassFromString(cellClassName) forCellWithReuseIdentifier:@"reuseIdentifier"];
+}
+
 
 #pragma Delegates
 //返回collection view里区(section)的个数，如果没有实现该方法，将默认返回1：
@@ -54,10 +53,9 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.viewData.count;
 }
-
+//willDisplayCell forItemAtIndexPath
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-//    FinanceInfo *model = [self.viewData objectAtIndex:indexPath.row];
-//    [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
+    
 }
 //返回某个indexPath对应的cell，该方法必须实现：
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

@@ -37,6 +37,7 @@
 		B59896941EE83960008E7E5E /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = B598968A1EE83960008E7E5E /* index.html */; };
 		B59DAAE71EE441A100E1873F /* UIImage+KYLECategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B59DAAE61EE441A100E1873F /* UIImage+KYLECategory.m */; };
 		B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3964B1EDA68050028626F /* HomeViewController.m */; };
+		B5F00EBE1EFB992A005A4003 /* MenuCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F00EBD1EFB992A005A4003 /* MenuCellView.m */; };
 		B5F950F61EF0D29E00993C24 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F950F51EF0D29E00993C24 /* MessageUI.framework */; };
 		B5F950F81EF373F500993C24 /* alert.html in Resources */ = {isa = PBXBuildFile; fileRef = B5F950F71EF373F500993C24 /* alert.html */; };
 		D5E15AABFE482F6202B2DA5F /* libPods-iOSBaseDevProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F80DD83600D7B0AC4DAE6A3 /* libPods-iOSBaseDevProject.a */; };
@@ -113,6 +114,8 @@
 		B5D3964A1EDA68050028626F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B5D3964B1EDA68050028626F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B5D3964D1EDA68230028626F /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		B5F00EBC1EFB992A005A4003 /* MenuCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCellView.h; sourceTree = "<group>"; };
+		B5F00EBD1EFB992A005A4003 /* MenuCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCellView.m; sourceTree = "<group>"; };
 		B5F950F51EF0D29E00993C24 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B5F950F71EF373F500993C24 /* alert.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = alert.html; sourceTree = "<group>"; };
 		BFF854E43775D97922CBD534 /* Pods-iOSBaseDevProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBaseDevProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBaseDevProjectUITests/Pods-iOSBaseDevProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -435,6 +438,8 @@
 			children = (
 				B504E5311EF91452009AC7E2 /* FinanceCellView.h */,
 				B504E5321EF91452009AC7E2 /* FinanceCellView.m */,
+				B5F00EBC1EFB992A005A4003 /* MenuCellView.h */,
+				B5F00EBD1EFB992A005A4003 /* MenuCellView.m */,
 				B5458B041EED07B6001D41F4 /* CardView.h */,
 				B5458B051EED07B6001D41F4 /* CardView.m */,
 			);
@@ -738,6 +743,7 @@
 			files = (
 				B57DE65C1EDA615500705E38 /* ViewController.m in Sources */,
 				B504E5301EF913E7009AC7E2 /* FinanceInfo.m in Sources */,
+				B5F00EBE1EFB992A005A4003 /* MenuCellView.m in Sources */,
 				B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */,
 				B504E5291EF8C66D009AC7E2 /* KyleURLProtocol.m in Sources */,
 				B57DE6591EDA615500705E38 /* AppDelegate.m in Sources */,

@@ -89,8 +89,8 @@
 
 #define DEGREES_TO_RADIANS(degrees) degrees * M_PI / 180
 
-#define StartTag CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
-#define EndTag  NSLog(@"Time: %f", CFAbsoluteTimeGetCurrent() - start)
+#define StartTag(tag) CFAbsoluteTime tag = CFAbsoluteTimeGetCurrent()
+#define EndTag(tag) NSLog(@"Comsuming Time: %f Seconds", CFAbsoluteTimeGetCurrent() - tag)
 
 #define WeakSelf(weakSelf)      __weak __typeof(&*self)    weakSelf  = self
 #define StrongSelf(strongSelf)  __strong __typeof(&*self) strongSelf = weakSelf

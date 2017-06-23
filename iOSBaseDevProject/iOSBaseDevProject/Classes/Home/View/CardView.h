@@ -17,4 +17,8 @@
 
 @property (nonatomic, copy) NSArray *viewData;
 
+@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+
+- (void)setCellClassName:(NSString *)cellClassName;
+
 @end
