@@ -15,7 +15,6 @@
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView* contentView;
 @property (nonatomic, strong) UIImageView* headerView;
-@property (nonatomic, strong) NSMutableArray *financeArray;
 @end
 
 @implementation HomeViewController
@@ -45,22 +44,15 @@
     }];
     
     CardView *financeView = [[CardView alloc]initWithFrame:CGRectZero];
+    [financeView setShowsVerticalScrollIndicator:NO];
+    [financeView setShowsHorizontalScrollIndicator:NO];
     [financeView setCellClassName:@"FinanceCellView"];
     [financeView.layout setItemSize:CGSizeMake(110, 90)];
     [financeView.layout setMinimumLineSpacing:10];
     [financeView.layout setSectionInset:UIEdgeInsetsMake(0, 10, 0, 10)];
     [financeView.layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    self.financeArray = [NSMutableArray arrayWithCapacity:0];
-    for (int i = 0; i < 10; i++) {
-        FinanceInfo *model = [[FinanceInfo alloc]init];
-        model.prodid = [NSString stringWithFormat:@"%d",i];
-        model.title = [NSString stringWithFormat:@"产品%d",i];
-        model.rate = @"3.50%";
-        model.tags = @[@"增值",@"保本",@"爱国"];
-        [self.financeArray addObject:model];
-    }
-    
-    [financeView setViewData:self.financeArray];
+    NSArray *viewData = [self getFinanceData];
+    [financeView setViewData:viewData];
     [financeView setOnTapBlock:^(NSIndexPath *indexPath){
         NSLog(@"%ld",(long)indexPath.row);
     }];
@@ -142,6 +134,21 @@
             NSLog(@"unknown button");
         }
     }
+}
+
+- (NSArray *)getFinanceData{
+    NSMutableArray *financeArray = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *financeArray1 = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 0; i < 10; i++) {
+        FinanceInfo *model = [[FinanceInfo alloc]init];
+        model.prodid = [NSString stringWithFormat:@"%d",i];
+        model.title = [NSString stringWithFormat:@"产品%d",i];
+        model.rate = @"3.50%";
+        model.tags = @[@"增值",@"保本",@"爱国"];
+        [financeArray1 addObject:model];
+    }
+    [financeArray addObject:financeArray1];
+    return financeArray;
 }
 
 

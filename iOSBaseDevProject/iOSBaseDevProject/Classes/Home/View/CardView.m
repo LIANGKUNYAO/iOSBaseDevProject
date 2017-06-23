@@ -25,15 +25,10 @@
 */
 - (instancetype)initWithFrame:(CGRect)frame{
     self.layout = [[UICollectionViewFlowLayout alloc] init];
-    self = [super initWithFrame:frame collectionViewLayout:_layout];
+    self = [super initWithFrame:frame collectionViewLayout:self.layout];
     if (self) {
-        //隐藏滑块
-        self.showsHorizontalScrollIndicator = NO;
-        self.showsVerticalScrollIndicator = NO;
-        //设置代理
         self.delegate = self;
         self.dataSource = self;
-        //设置背景颜色（默认黑色）
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -43,28 +38,25 @@
     [self registerClass:NSClassFromString(cellClassName) forCellWithReuseIdentifier:@"reuseIdentifier"];
 }
 
-
 #pragma Delegates
-//返回collection view里区(section)的个数，如果没有实现该方法，将默认返回1：
+//numberOfSectionsInCollectionView
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
-}
-//返回指定区(section)包含的数据源条目数(number of items)，该方法必须实现：
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.viewData.count;
 }
-//willDisplayCell forItemAtIndexPath
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+//numberOfItemsInSection
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self.viewData objectAtIndex:section].count;
 }
-//返回某个indexPath对应的cell，该方法必须实现：
+//cellForItemAtIndexPath
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    FinanceCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
-    FinanceInfo *model = [self.viewData objectAtIndex:indexPath.row];
-    [cell setCellTitle:model.title tags:model.tags withRate:model.rate];
-    return cell;
+    return [collectionView dequeueReusableCellWithReuseIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
 }
-//点击每个item实现的方法：
+//willDisplayCell
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    FinanceInfo *model = [[self.viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
+}
+//didSelectItemAtIndexPath
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.onTapBlock) {
         self.onTapBlock(indexPath);

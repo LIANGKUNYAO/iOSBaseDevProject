@@ -26,7 +26,7 @@
 */
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        __weak typeof (self) weakSelf = self;
+        WeakSelf(weakSelf);
 
         //设置背景色
         self.contentView.backgroundColor = [UIColor whiteColor];

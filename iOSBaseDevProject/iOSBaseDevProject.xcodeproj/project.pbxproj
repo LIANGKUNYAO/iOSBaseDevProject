@@ -436,12 +436,12 @@
 		B5D396491EDA67EB0028626F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B504E5311EF91452009AC7E2 /* FinanceCellView.h */,
-				B504E5321EF91452009AC7E2 /* FinanceCellView.m */,
-				B5F00EBC1EFB992A005A4003 /* MenuCellView.h */,
-				B5F00EBD1EFB992A005A4003 /* MenuCellView.m */,
 				B5458B041EED07B6001D41F4 /* CardView.h */,
 				B5458B051EED07B6001D41F4 /* CardView.m */,
+				B5F00EBC1EFB992A005A4003 /* MenuCellView.h */,
+				B5F00EBD1EFB992A005A4003 /* MenuCellView.m */,
+				B504E5311EF91452009AC7E2 /* FinanceCellView.h */,
+				B504E5321EF91452009AC7E2 /* FinanceCellView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -15,7 +15,7 @@
  */
 @property (nonatomic, copy) void (^onTapBlock)(NSIndexPath * indexPath);
 
-@property (nonatomic, copy) NSArray *viewData;
+@property (nonatomic, copy) NSArray<__kindof NSArray *> *viewData;
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 

@@ -28,8 +28,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        __weak typeof (self) weakSelf = self;
- 
+        WeakSelf(weakSelf);
+        
         //设置背景色
         self.contentView.backgroundColor = [UIColor whiteColor];
         
@@ -84,12 +84,15 @@
 
 #pragma mark - Interface
 - (void)setCellTitle:(NSString *)title tags:(NSArray *)tags withRate:(NSString *)rate {
-    __weak typeof (self) weakSelf = self;
+    WeakSelf(weakSelf);
     
     NSMutableAttributedString* textLabelStr = [[NSMutableAttributedString alloc]initWithString:rate];
     [textLabelStr setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:22]} range:NSMakeRange(0,1)];
     [self.rateLb setAttributedText:textLabelStr];
     
+    [self.titleLb setText:title];
+    
+    [self.tagView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     NSUInteger length = tags.count;
     for(int i = 0 ; i < length ; i++){
         UILabel *tagLb = [[UILabel alloc]init];
@@ -131,7 +134,7 @@
             }];
         }
     }
-    [self.titleLb setText:title];
+   
 }
 
 
