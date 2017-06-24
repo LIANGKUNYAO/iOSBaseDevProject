@@ -44,6 +44,7 @@
         make.height.mas_equalTo(250);
     }];
     
+    //推介信息
     KyleCollectionView *financeView = [[KyleCollectionView alloc]initWithFrame:CGRectZero];
     [financeView.layout setItemSize:CGSizeMake(110, 90)];
     [financeView.layout setMinimumLineSpacing:10];
@@ -66,30 +67,29 @@
         make.top.equalTo(weakSelf.headerView.mas_bottom);
         make.left.right.equalTo(weakSelf.contentView);
         make.height.mas_equalTo(110);
-        make.bottom.equalTo(weakSelf.contentView);
     }];
     
-    
+    //菜单信息
     KyleCollectionView *MenuView = [[KyleCollectionView alloc]initWithFrame:CGRectZero];
     [MenuView.layout setItemSize:CGSizeMake(110, 90)];
     [MenuView.layout setMinimumLineSpacing:10];
     [MenuView.layout setSectionInset:UIEdgeInsetsMake(0, 10, 0, 10)];
     [MenuView.layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
-    [financeView setShowsVerticalScrollIndicator:NO];
-    [financeView setShowsHorizontalScrollIndicator:NO];
-    [financeView setCellClass:[FinanceCellView class]];
-    [financeView setViewData:[self getFinanceData]];
-    [financeView setDidSelectItem:^(NSIndexPath *indexPath){
+    [MenuView setShowsVerticalScrollIndicator:NO];
+    [MenuView setShowsHorizontalScrollIndicator:NO];
+    [MenuView setCellClass:[FinanceCellView class]];
+    [MenuView setViewData:[self getFinanceData]];
+    [MenuView setDidSelectItem:^(NSIndexPath *indexPath){
         NSLog(@"%ld",(long)indexPath.row);
     }];
-    [financeView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
+    [MenuView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
         FinanceInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
     }];
-    [self.contentView addSubview:financeView];
-    [financeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.headerView.mas_bottom);
+    [self.contentView addSubview:MenuView];
+    [MenuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(financeView.mas_bottom);
         make.left.right.equalTo(weakSelf.contentView);
         make.height.mas_equalTo(110);
         make.bottom.equalTo(weakSelf.contentView);
