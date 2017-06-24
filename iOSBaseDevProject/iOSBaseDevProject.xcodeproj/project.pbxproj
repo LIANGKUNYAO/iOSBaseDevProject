@@ -41,6 +41,8 @@
 		B59C6C7F1EFD578A009B2D9E /* menuItem00000003.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C7B1EFD578A009B2D9E /* menuItem00000003.png */; };
 		B59C6C801EFD578A009B2D9E /* menuItem00000004.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C7C1EFD578A009B2D9E /* menuItem00000004.png */; };
 		B59C6C821EFD57CC009B2D9E /* defaultMenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C811EFD57CC009B2D9E /* defaultMenuItem.png */; };
+		B59C6C851EFEC3D7009B2D9E /* MenuInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B59C6C841EFEC3D7009B2D9E /* MenuInfo.m */; };
+		B59C6C871EFEC860009B2D9E /* menuItem00000000.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C861EFEC860009B2D9E /* menuItem00000000.png */; };
 		B59DAAE71EE441A100E1873F /* UIImage+KYLECategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B59DAAE61EE441A100E1873F /* UIImage+KYLECategory.m */; };
 		B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3964B1EDA68050028626F /* HomeViewController.m */; };
 		B5F00EBE1EFB992A005A4003 /* MenuCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F00EBD1EFB992A005A4003 /* MenuCellView.m */; };
@@ -120,6 +122,9 @@
 		B59C6C7B1EFD578A009B2D9E /* menuItem00000003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuItem00000003.png; sourceTree = "<group>"; };
 		B59C6C7C1EFD578A009B2D9E /* menuItem00000004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuItem00000004.png; sourceTree = "<group>"; };
 		B59C6C811EFD57CC009B2D9E /* defaultMenuItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultMenuItem.png; sourceTree = "<group>"; };
+		B59C6C831EFEC3D7009B2D9E /* MenuInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuInfo.h; sourceTree = "<group>"; };
+		B59C6C841EFEC3D7009B2D9E /* MenuInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuInfo.m; sourceTree = "<group>"; };
+		B59C6C861EFEC860009B2D9E /* menuItem00000000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuItem00000000.png; sourceTree = "<group>"; };
 		B59DAAE51EE441A100E1873F /* UIImage+KYLECategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KYLECategory.h"; sourceTree = "<group>"; };
 		B59DAAE61EE441A100E1873F /* UIImage+KYLECategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KYLECategory.m"; sourceTree = "<group>"; };
 		B5D396441EDA670D0028626F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -403,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				B59C6C811EFD57CC009B2D9E /* defaultMenuItem.png */,
+				B59C6C861EFEC860009B2D9E /* menuItem00000000.png */,
 				B59C6C791EFD578A009B2D9E /* menuItem00000001.png */,
 				B59C6C7A1EFD578A009B2D9E /* menuItem00000002.png */,
 				B59C6C7B1EFD578A009B2D9E /* menuItem00000003.png */,
@@ -455,6 +461,8 @@
 			children = (
 				B504E52E1EF913E7009AC7E2 /* FinanceInfo.h */,
 				B504E52F1EF913E7009AC7E2 /* FinanceInfo.m */,
+				B59C6C831EFEC3D7009B2D9E /* MenuInfo.h */,
+				B59C6C841EFEC3D7009B2D9E /* MenuInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -591,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5458B121EED4A21001D41F4 /* js in Resources */,
+				B59C6C871EFEC860009B2D9E /* menuItem00000000.png in Resources */,
 				B59C6C761EFD5634009B2D9E /* home.png in Resources */,
 				B55EB9691EF02A0E002F4F2A /* scanLine.png in Resources */,
 				B59C6C7E1EFD578A009B2D9E /* menuItem00000002.png in Resources */,
@@ -775,6 +784,7 @@
 			files = (
 				B57DE65C1EDA615500705E38 /* ViewController.m in Sources */,
 				B504E5301EF913E7009AC7E2 /* FinanceInfo.m in Sources */,
+				B59C6C851EFEC3D7009B2D9E /* MenuInfo.m in Sources */,
 				B5F00EBE1EFB992A005A4003 /* MenuCellView.m in Sources */,
 				B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */,
 				B504E5291EF8C66D009AC7E2 /* KyleURLProtocol.m in Sources */,

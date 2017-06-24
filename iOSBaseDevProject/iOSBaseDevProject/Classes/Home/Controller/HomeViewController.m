@@ -10,8 +10,11 @@
 #import "UIImage+KYLECategory.h"
 #import "KyleCollectionView.h"
 #import "QRHandlerViewController.h"
-#import "FinanceInfo.h"
+
 #import "FinanceCellView.h"
+#import "FinanceInfo.h"
+#import "MenuCellView.h"
+#import "MenuInfo.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView* contentView;
@@ -71,27 +74,32 @@
     
     //菜单信息
     KyleCollectionView *MenuView = [[KyleCollectionView alloc]initWithFrame:CGRectZero];
-    [MenuView.layout setItemSize:CGSizeMake(110, 90)];
-    [MenuView.layout setMinimumLineSpacing:10];
-    [MenuView.layout setSectionInset:UIEdgeInsetsMake(0, 10, 0, 10)];
-    [MenuView.layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [MenuView.layout setItemSize:CGSizeMake(SCREEN_WIDTH/4, 82)];
+    [MenuView.layout setMinimumLineSpacing:0];
+    [MenuView.layout setMinimumInteritemSpacing:0];
+    [MenuView.layout setSectionInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [MenuView.layout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     [MenuView setShowsVerticalScrollIndicator:NO];
     [MenuView setShowsHorizontalScrollIndicator:NO];
-    [MenuView setCellClass:[FinanceCellView class]];
-    [MenuView setViewData:[self getFinanceData]];
+    [MenuView setCellClass:[MenuCellView class]];
+    [MenuView setViewData:[self getMenuData]];
     [MenuView setDidSelectItem:^(NSIndexPath *indexPath){
         NSLog(@"%ld",(long)indexPath.row);
     }];
     [MenuView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
-        FinanceInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
+        MenuInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        UIImage *menuImg = [UIImage imageNamed:model.imgName];
+        if(!menuImg){
+            menuImg = [UIImage imageNamed:@"defaultMenuItem"];
+        }
+        [(MenuCellView *)cell setCellTitle:model.menuName withImage:menuImg];
     }];
     [self.contentView addSubview:MenuView];
     [MenuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(financeView.mas_bottom);
         make.left.right.equalTo(weakSelf.contentView);
-        make.height.mas_equalTo(110);
+        make.height.mas_equalTo(82*3);
         make.bottom.equalTo(weakSelf.contentView);
     }];
 }
@@ -182,6 +190,19 @@
     return financeArray;
 }
 
+- (NSArray *)getMenuData{
+    NSMutableArray *menuArray = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *menuArray1 = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 0; i < 10; i++) {
+        MenuInfo *model = [[MenuInfo alloc]init];
+        model.menuName = [NSString stringWithFormat:@"栏目%d",i];
+        model.menuId= [NSString stringWithFormat:@"%d",i];
+        model.imgName = [NSString stringWithFormat:@"menuItem0000000%d",i];
+        [menuArray1 addObject:model];
+    }
+    [menuArray addObject:menuArray1];
+    return menuArray;
+}
 
 #pragma mark - LifeCycle
 - (void)didReceiveMemoryWarning {
