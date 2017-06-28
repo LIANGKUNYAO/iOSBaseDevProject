@@ -29,15 +29,15 @@
         [_bridge setWebViewDelegate:self];
         
         //Register a OC handler
-        [self.bridge registerHandler:@"getUserId" handler:^(id data, WVJBResponseCallback responseCallback) {
-            NSLog(@"JS REQUEST: %@", data);
-            if (responseCallback) {
-                responseCallback(@{@"userId": @"123456"});
-            }
-        }];
+        //[self.bridge registerHandler:@"getUserId" handler:^(id data, WVJBResponseCallback responseCallback) {
+        //    NSLog(@"JS REQUEST: %@", data);
+        //    if (responseCallback) {
+        //        responseCallback(@{@"userId": @"123456"});
+        //    }
+        //}];
         
         //Call a JS handler
-        [self.bridge callHandler:@"showMyName"];
+        //[self.bridge callHandler:@"showMyName"];
         
         [self renderButtons:webView];
         [self loadPage:webView];
@@ -57,24 +57,43 @@
     
     UIButton *callbackButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [callbackButton setTitle:@"Call handler" forState:UIControlStateNormal];
+    [callbackButton.titleLabel setFont:font];
     [callbackButton addTarget:self action:@selector(callHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self.view insertSubview:callbackButton aboveSubview:webView];
-    callbackButton.frame = CGRectMake(0, 400, 100, 35);
-    callbackButton.titleLabel.font = font;
-    
-    UIButton* reloadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+
+    UIButton *reloadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [reloadButton setTitle:@"Reload webview" forState:UIControlStateNormal];
     [reloadButton addTarget:webView action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
+    [reloadButton.titleLabel setFont:font];
     [self.view insertSubview:reloadButton aboveSubview:webView];
-    reloadButton.frame = CGRectMake(90, 400, 100, 35);
-    reloadButton.titleLabel.font = font;
     
-    UIButton* safetyTimeoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+
+    
+    UIButton *safetyTimeoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [safetyTimeoutButton setTitle:@"Disable safety timeout" forState:UIControlStateNormal];
     [safetyTimeoutButton addTarget:self action:@selector(disableSafetyTimeout) forControlEvents:UIControlEventTouchUpInside];
+    [safetyTimeoutButton.titleLabel setFont:font];
     [self.view insertSubview:safetyTimeoutButton aboveSubview:webView];
-    safetyTimeoutButton.frame = CGRectMake(190, 400, 120, 35);
-    safetyTimeoutButton.titleLabel.font = font;
+   
+    WeakSelf(weakSelf);
+    [callbackButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(reloadButton);
+        make.bottom.mas_equalTo(-10).with.offset(-49);
+        make.left.equalTo(weakSelf.view);
+        
+    }];
+    [reloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(safetyTimeoutButton);
+        make.bottom.equalTo(callbackButton);
+        make.left.mas_equalTo(callbackButton.mas_right);
+        make.right.mas_equalTo(safetyTimeoutButton.mas_left);
+    }];
+    [safetyTimeoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(callbackButton);
+        make.bottom.equalTo(callbackButton);
+        make.right.equalTo(weakSelf.view);
+    }];
+
 }
 
 - (void)disableSafetyTimeout {
@@ -88,14 +107,14 @@
 }
 
 - (void)loadPage:(UIWebView*)webView {
-//    NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
-//    NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
-//    NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
-//    [webView loadHTMLString:appHtml baseURL:baseURL];
+    NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"alert" ofType:@"html"];
+    NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+    NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
+    [webView loadHTMLString:appHtml baseURL:baseURL];
     
-    NSURL *url = [NSURL URLWithString:@"https://www.baidu.com"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
+//    NSURL *url = [NSURL URLWithString:@"https://www.baidu.com"];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [webView loadRequest:request];
     
 }
 

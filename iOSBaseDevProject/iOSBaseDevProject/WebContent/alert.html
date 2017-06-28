@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--    <script>-->
+<!--        //该方法当网络不通是会卡住webview didfinishload 回调-->
+<!--        function sessionKeepSrc(){-->
+<!--            var img = new Image();-->
+<!--            img.setAttribute("src","http://82.200.77.196");-->
+<!--        }-->
+<!--        window.addEventListener('load',sessionKeepSrc,false);-->
+<!--    </script>-->
 	<meta charset="utf-8">
 	<title>Hello KYLE</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -25,7 +33,7 @@
 	<script src="js/angular.min.js"></script>
 	<script>
 		angular.module('ngApp', []).controller('ngCtrl', function($scope) {
-            alert("alert!!");
+            //alert("alert!!");
 		});
 	</script>
 </body>

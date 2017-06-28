@@ -71,7 +71,7 @@
         
         BOOL useWebview = YES;
         if(useWebview){
-            UIWebView* webView = [[UIWebView alloc] init];
+            UIWebView *webView = [[UIWebView alloc] init];
             [self.view addSubview:webView];
             webView.delegate = self;
             NSURL *url = [NSURL URLWithString:urlString];
