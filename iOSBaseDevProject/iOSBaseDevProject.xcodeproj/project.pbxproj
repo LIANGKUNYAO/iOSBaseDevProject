@@ -296,6 +296,7 @@
 		B56A1B031EDAFB6600D6BF69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B59C6C941F04E0A6009B2D9E /* libs */,
 				B56A1B041EDAFB6600D6BF69 /* images */,
 			);
 			path = Resources;
@@ -465,6 +466,29 @@
 				B59C6C921F049EF4009B2D9E /* defaultHeadImage.png */,
 			);
 			path = Self;
+			sourceTree = "<group>";
+		};
+		B59C6C941F04E0A6009B2D9E /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				B59C6C951F04E0A6009B2D9E /* KyleLibs */,
+				B59C6C961F04E0A6009B2D9E /* OtherLibs */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		B59C6C951F04E0A6009B2D9E /* KyleLibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = KyleLibs;
+			sourceTree = "<group>";
+		};
+		B59C6C961F04E0A6009B2D9E /* OtherLibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OtherLibs;
 			sourceTree = "<group>";
 		};
 		B59DAAE41EE441A100E1873F /* Categories */ = {
