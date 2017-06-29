@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "WebViewController.h"
 #import "UIImage+KYLECategory.h"
 #import "KyleCollectionView.h"
 #import "QRHandlerViewController.h"
@@ -15,6 +16,8 @@
 #import "FinanceInfo.h"
 #import "MenuCellView.h"
 #import "MenuInfo.h"
+
+#define ITEMPERLINE 4
 
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIView* contentView;
@@ -49,6 +52,7 @@
     
     //推介信息
     KyleCollectionView *financeView = [[KyleCollectionView alloc]initWithFrame:CGRectZero];
+    [financeView setBackgroundColor:[UIColor whiteColor]];
     [financeView.layout setItemSize:CGSizeMake(110, 90)];
     [financeView.layout setMinimumLineSpacing:10];
     [financeView.layout setSectionInset:UIEdgeInsetsMake(0, 10, 0, 10)];
@@ -74,9 +78,10 @@
     
     //菜单信息
     KyleCollectionView *MenuView = [[KyleCollectionView alloc]initWithFrame:CGRectZero];
-    [MenuView.layout setItemSize:CGSizeMake(SCREEN_WIDTH/4, 82)];
-    [MenuView.layout setMinimumLineSpacing:0];
-    [MenuView.layout setMinimumInteritemSpacing:0];
+    [MenuView setBackgroundColor:[UIColor clearColor]];
+    [MenuView.layout setItemSize:CGSizeMake((SCREEN_WIDTH-ITEMPERLINE+1)/ITEMPERLINE, 82)];
+    [MenuView.layout setMinimumLineSpacing:1];
+    [MenuView.layout setMinimumInteritemSpacing:1];
     [MenuView.layout setSectionInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     [MenuView.layout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
@@ -85,7 +90,13 @@
     [MenuView setCellClass:[MenuCellView class]];
     [MenuView setViewData:[self getMenuData]];
     [MenuView setDidSelectItem:^(NSIndexPath *indexPath){
-        NSLog(@"%ld",(long)indexPath.row);
+        NSLog(@"-->%ld -->%ld",(long)indexPath.section,(long)indexPath.row);
+        [SVProgressHUD show];
+        if(indexPath.section == 0 && indexPath.row == 0){
+            WebViewController *vc = [[WebViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }];
     [MenuView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
         MenuInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -105,6 +116,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO];
     //[self.navigationController.navigationBar setTranslucent:YES];
     //通过设置barStyle来改变statusBar的字体颜色
     [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack]; //default UIBarStyleDefault
@@ -116,8 +128,6 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //设置导航按钮颜色
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    
-    [self.tabBarController.tabBar setHidden:NO];
 }
 
 #pragma mark - UIs
@@ -166,6 +176,7 @@
     switch([sender tag]) {
         case 0:{
             QRHandlerViewController *vc = [[QRHandlerViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

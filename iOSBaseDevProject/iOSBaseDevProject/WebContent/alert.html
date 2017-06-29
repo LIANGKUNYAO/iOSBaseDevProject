@@ -22,7 +22,7 @@
 </head>
 <body ng-app="ngApp" ng-controller="ngCtrl">
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="navigationReturn"></a>
 		<h1 class="mui-title">ALERT</h1>
 	</header>
 	<div class="mui-content">
@@ -31,9 +31,15 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> 
 	<script src="js/mui.min.js"></script>
 	<script src="js/angular.min.js"></script>
+    <script src="js/base.js"></script>
 	<script>
 		angular.module('ngApp', []).controller('ngCtrl', function($scope) {
             //alert("alert!!");
+            setTimeout(function(){
+				mui.init({
+                    swipeBack:true //启用右滑关闭功能
+                });
+			});
 		});
 	</script>
 </body>

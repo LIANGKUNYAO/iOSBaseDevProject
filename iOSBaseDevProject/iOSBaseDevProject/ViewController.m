@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "HomeViewController.h"
 #import "WebViewController.h"
+#import "SelfViewController.h"
 #import "UIImage+KYLECategory.h"
 
 @interface ViewController ()
@@ -23,16 +24,16 @@
     
     // 控制器实例
     HomeViewController *homeView = [[HomeViewController alloc] init];
-    UINavigationController *nv1 = [[UINavigationController alloc] initWithRootViewController:homeView];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:homeView];
     // 标签栏图标
     UIImage *homeImage = [[UIImage imageNamed:@"home"] imageWithSize:SquareSize20];
-    nv1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:homeImage tag:0];
-    [self addChildViewController:nv1];
+    nvc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:homeImage tag:0];
+    [self addChildViewController:nvc];
     
-    WebViewController *webView = [[WebViewController alloc] init];
-    UIImage *userImage = [[UIImage imageNamed:@"profile"] imageWithSize:SquareSize20];
-    webView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:userImage tag:1];
-    [self addChildViewController:webView];
+    SelfViewController *selfView = [[SelfViewController alloc]init];
+    UIImage *selfImage = [[UIImage imageNamed:@"profile"] imageWithSize:SquareSize20];
+    selfView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:selfImage tag:2];
+    [self addChildViewController:selfView];
 }
 
 

@@ -43,6 +43,9 @@
 		B59C6C821EFD57CC009B2D9E /* defaultMenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C811EFD57CC009B2D9E /* defaultMenuItem.png */; };
 		B59C6C851EFEC3D7009B2D9E /* MenuInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B59C6C841EFEC3D7009B2D9E /* MenuInfo.m */; };
 		B59C6C871EFEC860009B2D9E /* menuItem00000000.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C861EFEC860009B2D9E /* menuItem00000000.png */; };
+		B59C6C8E1F049827009B2D9E /* SelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59C6C8D1F049827009B2D9E /* SelfViewController.m */; };
+		B59C6C911F049AFD009B2D9E /* bgSelf.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C901F049AFD009B2D9E /* bgSelf.png */; };
+		B59C6C931F049EF4009B2D9E /* defaultHeadImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B59C6C921F049EF4009B2D9E /* defaultHeadImage.png */; };
 		B59DAAE71EE441A100E1873F /* UIImage+KYLECategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B59DAAE61EE441A100E1873F /* UIImage+KYLECategory.m */; };
 		B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D3964B1EDA68050028626F /* HomeViewController.m */; };
 		B5F00EBE1EFB992A005A4003 /* MenuCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5F00EBD1EFB992A005A4003 /* MenuCellView.m */; };
@@ -125,6 +128,10 @@
 		B59C6C831EFEC3D7009B2D9E /* MenuInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuInfo.h; sourceTree = "<group>"; };
 		B59C6C841EFEC3D7009B2D9E /* MenuInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuInfo.m; sourceTree = "<group>"; };
 		B59C6C861EFEC860009B2D9E /* menuItem00000000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuItem00000000.png; sourceTree = "<group>"; };
+		B59C6C8C1F049827009B2D9E /* SelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfViewController.h; sourceTree = "<group>"; };
+		B59C6C8D1F049827009B2D9E /* SelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfViewController.m; sourceTree = "<group>"; };
+		B59C6C901F049AFD009B2D9E /* bgSelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgSelf.png; sourceTree = "<group>"; };
+		B59C6C921F049EF4009B2D9E /* defaultHeadImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultHeadImage.png; sourceTree = "<group>"; };
 		B59DAAE51EE441A100E1873F /* UIImage+KYLECategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KYLECategory.h"; sourceTree = "<group>"; };
 		B59DAAE61EE441A100E1873F /* UIImage+KYLECategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KYLECategory.m"; sourceTree = "<group>"; };
 		B5D396441EDA670D0028626F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -297,6 +304,7 @@
 		B56A1B041EDAFB6600D6BF69 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B59C6C8F1F049AFD009B2D9E /* Self */,
 				B59C6C781EFD578A009B2D9E /* Menu */,
 				B55EB9651EF02A0E002F4F2A /* QR */,
 				B56A1B231EDB11A400D6BF69 /* Home */,
@@ -417,6 +425,48 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		B59C6C881F0497F3009B2D9E /* Self */ = {
+			isa = PBXGroup;
+			children = (
+				B59C6C891F0497F3009B2D9E /* Controller */,
+				B59C6C8A1F0497F3009B2D9E /* Model */,
+				B59C6C8B1F0497F3009B2D9E /* View */,
+			);
+			path = Self;
+			sourceTree = "<group>";
+		};
+		B59C6C891F0497F3009B2D9E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B59C6C8C1F049827009B2D9E /* SelfViewController.h */,
+				B59C6C8D1F049827009B2D9E /* SelfViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B59C6C8A1F0497F3009B2D9E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B59C6C8B1F0497F3009B2D9E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B59C6C8F1F049AFD009B2D9E /* Self */ = {
+			isa = PBXGroup;
+			children = (
+				B59C6C901F049AFD009B2D9E /* bgSelf.png */,
+				B59C6C921F049EF4009B2D9E /* defaultHeadImage.png */,
+			);
+			path = Self;
+			sourceTree = "<group>";
+		};
 		B59DAAE41EE441A100E1873F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +481,7 @@
 			children = (
 				B504E5261EF8C63C009AC7E2 /* Public */,
 				B55EB9581EF02534002F4F2A /* QRCode */,
+				B59C6C881F0497F3009B2D9E /* Self */,
 				B53A220F1EEAD9A70081DE7B /* Webview */,
 				B5D396461EDA67EB0028626F /* Home */,
 			);
@@ -607,6 +658,7 @@
 				B59896941EE83960008E7E5E /* index.html in Resources */,
 				B5F950F81EF373F500993C24 /* alert.html in Resources */,
 				B59C6C6E1EFD52CF009B2D9E /* torch_off.png in Resources */,
+				B59C6C931F049EF4009B2D9E /* defaultHeadImage.png in Resources */,
 				B55EB9681EF02A0E002F4F2A /* scanFrame.png in Resources */,
 				B5458B101EED4A21001D41F4 /* css in Resources */,
 				B59C6C771EFD5634009B2D9E /* profile.png in Resources */,
@@ -616,6 +668,7 @@
 				B59C6C6F1EFD52CF009B2D9E /* torch_on.png in Resources */,
 				B59C6C801EFD578A009B2D9E /* menuItem00000004.png in Resources */,
 				B59C6C821EFD57CC009B2D9E /* defaultMenuItem.png in Resources */,
+				B59C6C911F049AFD009B2D9E /* bgSelf.png in Resources */,
 				B57DE65F1EDA615500705E38 /* Main.storyboard in Resources */,
 				B59C6C7F1EFD578A009B2D9E /* menuItem00000003.png in Resources */,
 				B59C6C6D1EFD52CF009B2D9E /* qrScan.png in Resources */,
@@ -796,6 +849,7 @@
 				B5D3964C1EDA68050028626F /* HomeViewController.m in Sources */,
 				B5458B061EED07B6001D41F4 /* KyleCollectionView.m in Sources */,
 				B504E5331EF91452009AC7E2 /* FinanceCellView.m in Sources */,
+				B59C6C8E1F049827009B2D9E /* SelfViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -51,9 +51,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     //设置导航按钮颜色
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
-    
-    [self.tabBarController.tabBar setHidden:YES];
-    
+
     [NSURLProtocol registerClass:[KyleURLProtocol class]];
 }
 - (void)viewWillDisappear:(BOOL)animated{

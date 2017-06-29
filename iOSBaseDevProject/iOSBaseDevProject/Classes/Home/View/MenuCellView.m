@@ -30,8 +30,8 @@
 
         //设置背景色
         self.contentView.backgroundColor = [UIColor whiteColor];
-        self.contentView.layer.borderWidth = 0.5;
-        self.contentView.layer.borderColor = [UIColorFromHex(0XE9E9E9) CGColor];
+        //self.contentView.layer.borderWidth = 0.5;
+        //self.contentView.layer.borderColor = [UIColorFromHex(0XE9E9E9) CGColor];
         
         self.iconView = [[UIImageView alloc]init];
         [self.contentView addSubview:self.iconView];

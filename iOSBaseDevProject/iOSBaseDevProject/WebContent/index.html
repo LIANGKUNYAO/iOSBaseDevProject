@@ -14,7 +14,7 @@
 </head>
 <body ng-app="ngApp" ng-controller="ngCtrl">
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="navigationReturn"></a>
 		<h1 class="mui-title">INDEX</h1>
 	</header>
 	<div class="mui-content">
@@ -51,6 +51,7 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> 
 	<script src="js/mui.min.js"></script>
 	<script src="js/angular.min.js"></script>
+    <script src="js/base.js"></script>
 	<script>
 		angular.module('ngApp', []).controller('ngCtrl', function($scope) {
 			$scope.firstName = "John";
@@ -63,42 +64,7 @@
 			setTimeout(function(){
 				mui.init({
 						swipeBack:true //启用右滑关闭功能
-					});
-				console.log('run to here');
-				/*这段代码是固定的，必须要放到js中*/
-				function setupWebViewJavascriptBridge(callback) {
-					if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
-					if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
-					window.WVJBCallbacks = [callback];
-					var WVJBIframe = document.createElement('iframe');
-					WVJBIframe.style.display = 'none';
-					WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
-					document.documentElement.appendChild(WVJBIframe);
-					setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
-				}
-				
-				setupWebViewJavascriptBridge(function(bridge) {
-					//Register a JS handler
-					bridge.registerHandler('showMyName', function(data, responseCallback) {
-                        alert("my name is " + data.name);
-                        if(responseCallback != null){
-                            responseCallback({'retCode': '0', 'retMess': 'YOUR NAME SHOWED'});
-                        }
-					});
-                    //Register a JS handler without Data and Response Callback
-                    bridge.registerHandler('showMyName', function() {
-                        alert('435345');
-                    });
-					
-					// Call an OC handler with Data and Response Callback
-					bridge.callHandler('getUserId', {'key':'value'} ,function(responseData) {
-						alert("responseData" + responseData.userId)
-					});
-					
-					// Call an OC handler without Data and Response Callback
-					bridge.callHandler('getUserId');
-					
-				})
+                });
 			}); 
 		});
 	</script>

@@ -27,7 +27,6 @@
     if (self) {
         self.delegate = self;
         self.dataSource = self;
-        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
