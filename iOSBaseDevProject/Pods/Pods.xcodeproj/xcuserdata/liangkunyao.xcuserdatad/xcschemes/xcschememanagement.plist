@@ -44,30 +44,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>XHLaunchAd.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>035CFF8A55BE42EC3FE4534F91B1D6A9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>04CF549EBEEE7BC87AEAE35397184D94</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3614405C05A41BD16F7D3BEF23D563F7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5ED9CD53C9489C4CFA7837F60218C9BA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>86AFABE0C9A250814E29EA001383C451</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E76881E1C21A9158802C126095F2C2E5</key>
+		<key>B6153C7C3AC3FD6DB07F152B722B38FB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EFC446CAE565EE08EA897AFC636BB3EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
