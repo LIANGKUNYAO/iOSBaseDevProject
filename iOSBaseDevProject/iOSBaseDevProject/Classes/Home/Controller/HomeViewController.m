@@ -79,6 +79,7 @@
     //菜单信息
     KyleCollectionView *MenuView = [[KyleCollectionView alloc]initWithFrame:CGRectZero];
     [MenuView setBackgroundColor:[UIColor clearColor]];
+    [MenuView setScrollEnabled:NO];
     [MenuView.layout setItemSize:CGSizeMake((SCREEN_WIDTH-ITEMPERLINE+1)/ITEMPERLINE, 82)];
     [MenuView.layout setMinimumLineSpacing:1];
     [MenuView.layout setMinimumInteritemSpacing:1];

@@ -24,16 +24,18 @@
     
     // 控制器实例
     HomeViewController *homeView = [[HomeViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:homeView];
+    UINavigationController *nvHomeView = [[UINavigationController alloc] initWithRootViewController:homeView];
     // 标签栏图标
     UIImage *homeImage = [[UIImage imageNamed:@"home"] imageWithSize:SquareSize20];
-    nvc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:homeImage tag:0];
-    [self addChildViewController:nvc];
+    nvHomeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:homeImage tag:0];
+    [self addChildViewController:nvHomeView];
     
     SelfViewController *selfView = [[SelfViewController alloc]init];
+    UINavigationController *nvSelfView = [[UINavigationController alloc] initWithRootViewController:selfView];
+    // 标签栏图标
     UIImage *selfImage = [[UIImage imageNamed:@"profile"] imageWithSize:SquareSize20];
-    selfView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:selfImage tag:2];
-    [self addChildViewController:selfView];
+    nvSelfView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:selfImage tag:2];
+    [self addChildViewController:nvSelfView];
 }
 
 
