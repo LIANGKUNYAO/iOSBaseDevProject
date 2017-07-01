@@ -18,6 +18,7 @@ PODS:
   - MJRefresh (3.1.12)
   - SVProgressHUD (2.1.2)
   - WebViewJavascriptBridge (5.2.0)
+  - XHLaunchAd (3.4.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - MJRefresh
   - SVProgressHUD
   - WebViewJavascriptBridge (~> 5.0)
+  - XHLaunchAd
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -32,7 +34,8 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
+  XHLaunchAd: 4bc5a8e71442aff16eae821fe2e0f4fcc23a596d
 
-PODFILE CHECKSUM: f6346145bc49d79d8b4462b43054d6db56f9a4b7
+PODFILE CHECKSUM: 88f1b728287abfa004364b1adcebfa4c9f1c40d6
 
 COCOAPODS: 1.2.0
