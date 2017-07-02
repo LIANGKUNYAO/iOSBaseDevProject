@@ -10,4 +10,7 @@
 
 @interface WelcomeViewController : UIViewController
 
+@property (nonatomic,strong) NSURL *movieURL;
+
+
 @end

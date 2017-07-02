@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "WelcomeViewController.h"
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -19,16 +20,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    //本地缓存的版本号
+    NSString *versionCache = [[NSUserDefaults standardUserDefaults] objectForKey:@"VersionCache"];
+    //当前应用版本号
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    if (![versionCache isEqualToString:version]){
+        WelcomeViewController *vc = [[WelcomeViewController alloc]init];
+        vc.movieURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"welcome"ofType:@"mp4"]];
+        self.window.rootViewController = vc;
         NSLog(@"第一次启动");
+        //设置标志，下次启动不再进入
+        [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"VersionCache"];
     }else{
         NSLog(@"不是第一次启动");
+        ViewController *vc = [[ViewController alloc] init];
+        self.window.rootViewController = vc;
     }
-    
-    ViewController *vc = [[ViewController alloc] init];
-    self.window.rootViewController = vc;
-    [self.window makeKeyAndVisible];
     return YES;
 }
 

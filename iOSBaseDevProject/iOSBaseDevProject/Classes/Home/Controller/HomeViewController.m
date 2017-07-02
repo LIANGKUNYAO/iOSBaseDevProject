@@ -20,8 +20,8 @@
 #define ITEMPERLINE 4
 
 @interface HomeViewController ()<UIScrollViewDelegate>
-@property (nonatomic, strong) UIView* contentView;
-@property (nonatomic, strong) UIImageView* headerView;
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIImageView *headerView;
 @end
 
 @implementation HomeViewController
