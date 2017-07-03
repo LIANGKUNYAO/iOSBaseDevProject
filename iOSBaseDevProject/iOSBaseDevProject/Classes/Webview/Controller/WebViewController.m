@@ -34,8 +34,8 @@
 
         [self registerHandler];
         
-        NSString* htmlPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
-        NSString* appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+        NSString *htmlPath = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
+        NSString *appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
         NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
         [webView loadHTMLString:appHtml baseURL:baseURL];
         

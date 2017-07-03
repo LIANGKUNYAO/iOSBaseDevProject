@@ -38,6 +38,7 @@
     self.scanView.delegate = self;
     [self.view addSubview:self.scanView];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [self.scanView startScan];
     //[self.navigationController.navigationBar setTranslucent:NO];
@@ -54,6 +55,7 @@
 
     [NSURLProtocol registerClass:[KyleURLProtocol class]];
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [NSURLProtocol unregisterClass:[KyleURLProtocol class]];
 }
@@ -70,11 +72,18 @@
         BOOL useWebview = YES;
         if(useWebview){
             UIWebView *webView = [[UIWebView alloc] init];
-            [self.view addSubview:webView];
             webView.delegate = self;
+            [self.view addSubview:webView];
+            
             NSURL *url = [NSURL URLWithString:urlString];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             [webView loadRequest:request];
+            
+//            NSString *htmlPath = [[NSBundle mainBundle] pathForResource:@"alert" ofType:@"html"];
+//            NSString *appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+//            NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
+//            [webView loadHTMLString:appHtml baseURL:baseURL];
+            
         }else{
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
