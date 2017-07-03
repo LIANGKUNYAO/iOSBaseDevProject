@@ -14,7 +14,7 @@
 @implementation KyleURLProtocol
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request{
-    NSLog(@"URL-->%@",request.URL.absoluteString);
+    //NSLog(@"URL-->%@",request.URL.absoluteString);
     return NO;
 }
 

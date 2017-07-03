@@ -51,7 +51,8 @@
         [self.titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(weakSelf.contentView);
             make.bottom.equalTo(weakSelf.contentView).with.offset(-15);
-            make.left.right.equalTo(weakSelf.contentView);
+            make.left.equalTo(weakSelf.contentView).with.offset(5);
+            make.right.equalTo(weakSelf.contentView).with.offset(-5);
         }];
     }
     

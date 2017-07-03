@@ -15,8 +15,9 @@
 #define MAILLIST @[@"liangkunyao@hotmail.com"]
 
 @interface QRHandlerViewController ()<ScanViewDelegate,MFMailComposeViewControllerDelegate,UIWebViewDelegate>
-@property (nonatomic, strong) ScanView* scanView;
-@property (nonatomic, strong) UIBarButtonItem* torchBtn;
+@property (nonatomic, strong) ScanView *scanView;
+@property (nonatomic, strong) UIBarButtonItem *torchBtn;
+@property (nonatomic, strong) UIWebView *webview;
 @end
 
 @implementation QRHandlerViewController
@@ -70,14 +71,17 @@
         NSString *urlString = [result substringWithRange:urlRange];
         
         BOOL useWebview = YES;
+        // webview could run javascript
         if(useWebview){
-            UIWebView *webView = [[UIWebView alloc] init];
-            webView.delegate = self;
-            [self.view addSubview:webView];
-            
+            if(!self.webview){
+                self.webview = [[UIWebView alloc] init];
+                self.webview.delegate = self;
+                [self.view addSubview:self.webview];
+            }
+
             NSURL *url = [NSURL URLWithString:urlString];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            [webView loadRequest:request];
+            [self.webview loadRequest:request];
             
 //            NSString *htmlPath = [[NSBundle mainBundle] pathForResource:@"alert" ofType:@"html"];
 //            NSString *appHtml = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
@@ -120,7 +124,7 @@
 }
 //webview加载完成后的回调
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    NSString *JsToGetHTMLSource = @"document.body.innerHTML";
+    NSString *JsToGetHTMLSource = @"document.documentElement.innerHTML";
     NSString *htmlString = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -158,6 +162,10 @@
         // 设置代理
         mailVc.mailComposeDelegate = self;
         // 显示控制器
+        // 若已经Present，则dismiss
+        if([self presentedViewController]){
+            [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
+        }
         [self presentViewController:mailVc animated:YES completion:nil];
     }
 }

@@ -89,7 +89,12 @@
     [MenuView setShowsVerticalScrollIndicator:NO];
     [MenuView setShowsHorizontalScrollIndicator:NO];
     [MenuView setCellClass:[MenuCellView class]];
-    [MenuView setViewData:[self getMenuData]];
+    NSArray *menuViewData = [self getMenuData];
+    NSArray *menuData = [menuViewData objectAtIndex:0];
+    //向上取整 ceil()
+    //向下取整 floor()
+    NSUInteger lineNum = ceil((float)menuData.count/ITEMPERLINE);
+    [MenuView setViewData:menuViewData];
     [MenuView setDidSelectItem:^(NSIndexPath *indexPath){
         NSLog(@"-->%ld -->%ld",(long)indexPath.section,(long)indexPath.row);
         [SVProgressHUD show];
@@ -111,7 +116,7 @@
     [MenuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(financeView.mas_bottom);
         make.left.right.equalTo(weakSelf.contentView);
-        make.height.mas_equalTo(82*3);
+        make.height.mas_equalTo(82*lineNum);
         make.bottom.equalTo(weakSelf.contentView);
     }];
 }
@@ -205,11 +210,18 @@
 - (NSArray *)getMenuData{
     NSMutableArray *menuArray = [NSMutableArray arrayWithCapacity:0];
     NSMutableArray *menuArray1 = [NSMutableArray arrayWithCapacity:0];
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 23; i++) {
         MenuInfo *model = [[MenuInfo alloc]init];
-        model.menuName = [NSString stringWithFormat:@"栏目%d",i];
+        //栏目名称
+        if (i == 0) {
+            model.menuName = [NSString stringWithFormat:@"UIWebView"];
+        }else{
+            model.menuName = [NSString stringWithFormat:@"栏目%d",i];
+        }
+        //栏目编号
         model.menuId= [NSString stringWithFormat:@"%d",i];
-        model.imgName = [NSString stringWithFormat:@"menuItem0000000%d",i];
+        //栏目图片
+        model.imgName = [NSString stringWithFormat:@"menuItem%08d",i];
         [menuArray1 addObject:model];
     }
     [menuArray addObject:menuArray1];
