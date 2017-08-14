@@ -7,6 +7,7 @@
 //
 
 #import "SelfViewController.h"
+#import "BluetoothViewController.h"
 
 @interface SelfViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic,strong) UIImageView *headerBgView;
@@ -89,6 +90,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES];
+    //resetting delegate
+    self.tableView.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    //scrollViewDidScroll will be triggered if comment this line
+    self.tableView.delegate = nil;
 }
 
 #pragma mark - Delegates
@@ -102,15 +110,26 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:@"reuseIdentifier"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"UITableCellView %zd",indexPath.row];
-    return cell;
+    if(indexPath.row == 0){
+        cell.textLabel.text = @"Bluetooth";
+    }else{
+        cell.textLabel.text = [NSString stringWithFormat:@"UITableCellView %zd",indexPath.row];
+    }
+     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UIViewController *vc = [[UIViewController alloc]init];
-    vc.title = [NSString stringWithFormat:@"UITableCellView %zd",indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if(indexPath.row == 0){
+        BluetoothViewController *vc = [[BluetoothViewController alloc]init];
+        vc.title = @"Bluetooth";
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        UIViewController *vc = [[UIViewController alloc]init];
+        vc.title = [NSString stringWithFormat:@"UITableCellView %zd",indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

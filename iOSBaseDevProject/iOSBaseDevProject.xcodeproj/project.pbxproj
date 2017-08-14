@@ -17,6 +17,10 @@
 		B5458B101EED4A21001D41F4 /* css in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0D1EED4A21001D41F4 /* css */; };
 		B5458B111EED4A21001D41F4 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0E1EED4A21001D41F4 /* fonts */; };
 		B5458B121EED4A21001D41F4 /* js in Resources */ = {isa = PBXBuildFile; fileRef = B5458B0F1EED4A21001D41F4 /* js */; };
+		B54A48921F41D8D000BA23B8 /* BluetoothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54A48911F41D8D000BA23B8 /* BluetoothViewController.m */; };
+		B54A48971F41D90200BA23B8 /* CharacteristicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54A48941F41D90200BA23B8 /* CharacteristicViewController.m */; };
+		B54A48981F41D90200BA23B8 /* PeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54A48961F41D90200BA23B8 /* PeripheralViewController.m */; };
+		B54A489B1F41D90A00BA23B8 /* PeripheralInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B54A489A1F41D90A00BA23B8 /* PeripheralInfo.m */; };
 		B55EB9571EF02502002F4F2A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55EB9561EF02502002F4F2A /* AVFoundation.framework */; };
 		B55EB95E1EF02643002F4F2A /* ScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = B55EB95D1EF02643002F4F2A /* ScanView.m */; };
 		B55EB9611EF0266B002F4F2A /* QRHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55EB9601EF0266B002F4F2A /* QRHandlerViewController.m */; };
@@ -107,6 +111,14 @@
 		B5458B0D1EED4A21001D41F4 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
 		B5458B0E1EED4A21001D41F4 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B5458B0F1EED4A21001D41F4 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
+		B54A48901F41D8D000BA23B8 /* BluetoothViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothViewController.h; sourceTree = "<group>"; };
+		B54A48911F41D8D000BA23B8 /* BluetoothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothViewController.m; sourceTree = "<group>"; };
+		B54A48931F41D90200BA23B8 /* CharacteristicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacteristicViewController.h; sourceTree = "<group>"; };
+		B54A48941F41D90200BA23B8 /* CharacteristicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacteristicViewController.m; sourceTree = "<group>"; };
+		B54A48951F41D90200BA23B8 /* PeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralViewController.h; sourceTree = "<group>"; };
+		B54A48961F41D90200BA23B8 /* PeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralViewController.m; sourceTree = "<group>"; };
+		B54A48991F41D90A00BA23B8 /* PeripheralInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralInfo.h; sourceTree = "<group>"; };
+		B54A489A1F41D90A00BA23B8 /* PeripheralInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralInfo.m; sourceTree = "<group>"; };
 		B55EB9561EF02502002F4F2A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B55EB95C1EF02643002F4F2A /* ScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanView.h; sourceTree = "<group>"; };
 		B55EB95D1EF02643002F4F2A /* ScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanView.m; sourceTree = "<group>"; };
@@ -281,6 +293,45 @@
 			sourceTree = "<group>";
 		};
 		B53A22121EEAD9A70081DE7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B54A488C1F41D2A500BA23B8 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				B54A488D1F41D2DF00BA23B8 /* Controller */,
+				B54A488E1F41D2DF00BA23B8 /* Model */,
+				B54A488F1F41D2DF00BA23B8 /* View */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		B54A488D1F41D2DF00BA23B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B54A48901F41D8D000BA23B8 /* BluetoothViewController.h */,
+				B54A48911F41D8D000BA23B8 /* BluetoothViewController.m */,
+				B54A48931F41D90200BA23B8 /* CharacteristicViewController.h */,
+				B54A48941F41D90200BA23B8 /* CharacteristicViewController.m */,
+				B54A48951F41D90200BA23B8 /* PeripheralViewController.h */,
+				B54A48961F41D90200BA23B8 /* PeripheralViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B54A488E1F41D2DF00BA23B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B54A48991F41D90A00BA23B8 /* PeripheralInfo.h */,
+				B54A489A1F41D90A00BA23B8 /* PeripheralInfo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B54A488F1F41D2DF00BA23B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -561,6 +612,7 @@
 		B5D396451EDA67EB0028626F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B54A488C1F41D2A500BA23B8 /* Bluetooth */,
 				B504E5261EF8C63C009AC7E2 /* Public */,
 				B55EB9581EF02534002F4F2A /* QRCode */,
 				B59C6C881F0497F3009B2D9E /* Self */,
@@ -935,11 +987,14 @@
 				B57DE65C1EDA615500705E38 /* ViewController.m in Sources */,
 				B504E5301EF913E7009AC7E2 /* FinanceInfo.m in Sources */,
 				B59C6C851EFEC3D7009B2D9E /* MenuInfo.m in Sources */,
+				B54A489B1F41D90A00BA23B8 /* PeripheralInfo.m in Sources */,
 				B5F00EBE1EFB992A005A4003 /* MenuCellView.m in Sources */,
 				B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */,
 				B504E5291EF8C66D009AC7E2 /* KyleURLProtocol.m in Sources */,
 				B57DE6591EDA615500705E38 /* AppDelegate.m in Sources */,
 				B59DAAE71EE441A100E1873F /* UIImage+KYLECategory.m in Sources */,
+				B54A48921F41D8D000BA23B8 /* BluetoothViewController.m in Sources */,
+				B54A48971F41D90200BA23B8 /* CharacteristicViewController.m in Sources */,
 				B55EB9611EF0266B002F4F2A /* QRHandlerViewController.m in Sources */,
 				B57DE6561EDA615500705E38 /* main.m in Sources */,
 				B55EB95E1EF02643002F4F2A /* ScanView.m in Sources */,
@@ -948,6 +1003,7 @@
 				B5F5C2331F07D70A00AFA907 /* WelcomeViewController.m in Sources */,
 				B504E5331EF91452009AC7E2 /* FinanceCellView.m in Sources */,
 				B59C6C8E1F049827009B2D9E /* SelfViewController.m in Sources */,
+				B54A48981F41D90200BA23B8 /* PeripheralViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

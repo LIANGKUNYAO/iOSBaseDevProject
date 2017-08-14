@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - BabyBluetooth (0.7.0)
   - Masonry (1.0.2)
   - MJRefresh (3.1.12)
   - SVProgressHUD (2.1.2)
@@ -21,6 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - BabyBluetooth (~> 0.7.0)
   - Masonry (~> 1.0)
   - MJRefresh
   - SVProgressHUD
@@ -28,11 +30,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  BabyBluetooth: d50758aecf24d4a0ab9271d69f0f116d6bee51c9
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
 
-PODFILE CHECKSUM: f6346145bc49d79d8b4462b43054d6db56f9a4b7
+PODFILE CHECKSUM: d1c5564877cab8ab4117a6bea8ac5281d1e85cf8
 
 COCOAPODS: 1.2.0
