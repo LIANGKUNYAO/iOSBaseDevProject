@@ -25,6 +25,7 @@
 		B55EB9691EF02A0E002F4F2A /* scanLine.png in Resources */ = {isa = PBXBuildFile; fileRef = B55EB9671EF02A0E002F4F2A /* scanLine.png */; };
 		B56A1B271EDB11A400D6BF69 /* bgRed.png in Resources */ = {isa = PBXBuildFile; fileRef = B56A1B241EDB11A400D6BF69 /* bgRed.png */; };
 		B57BFEA91F42932200AA26AD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B57BFEA81F42932200AA26AD /* CoreBluetooth.framework */; };
+		B57BFEAC1F42DCD300AA26AD /* BluetoothTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B57BFEAB1F42DCD300AA26AD /* BluetoothTableViewCell.m */; };
 		B57DE6561EDA615500705E38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE6551EDA615500705E38 /* main.m */; };
 		B57DE6591EDA615500705E38 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE6581EDA615500705E38 /* AppDelegate.m */; };
 		B57DE65C1EDA615500705E38 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B57DE65B1EDA615500705E38 /* ViewController.m */; };
@@ -120,6 +121,8 @@
 		B55EB9671EF02A0E002F4F2A /* scanLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanLine.png; sourceTree = "<group>"; };
 		B56A1B241EDB11A400D6BF69 /* bgRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgRed.png; sourceTree = "<group>"; };
 		B57BFEA81F42932200AA26AD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		B57BFEAA1F42DCD300AA26AD /* BluetoothTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothTableViewCell.h; sourceTree = "<group>"; };
+		B57BFEAB1F42DCD300AA26AD /* BluetoothTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothTableViewCell.m; sourceTree = "<group>"; };
 		B57DE6511EDA615500705E38 /* iOSBaseDevProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSBaseDevProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B57DE6551EDA615500705E38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B57DE6571EDA615500705E38 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -323,6 +326,8 @@
 		B54A488F1F41D2DF00BA23B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B57BFEAA1F42DCD300AA26AD /* BluetoothTableViewCell.h */,
+				B57BFEAB1F42DCD300AA26AD /* BluetoothTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -975,6 +980,7 @@
 			files = (
 				B57DE65C1EDA615500705E38 /* ViewController.m in Sources */,
 				B504E5301EF913E7009AC7E2 /* FinanceInfo.m in Sources */,
+				B57BFEAC1F42DCD300AA26AD /* BluetoothTableViewCell.m in Sources */,
 				B59C6C851EFEC3D7009B2D9E /* MenuInfo.m in Sources */,
 				B5F00EBE1EFB992A005A4003 /* MenuCellView.m in Sources */,
 				B53A22151EEAD9D50081DE7B /* WebViewController.m in Sources */,

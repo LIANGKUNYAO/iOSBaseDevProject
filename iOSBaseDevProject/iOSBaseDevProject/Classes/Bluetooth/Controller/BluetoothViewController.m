@@ -7,11 +7,10 @@
 //
 
 #import "BluetoothViewController.h"
+#import "BluetoothTableViewCell.h"
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "SVProgressHUD.h"
-#import <AVFoundation/AVFoundation.h>
 
-@interface BluetoothViewController ()<UITableViewDataSource,UITableViewDelegate,CBCentralManagerDelegate,CBPeripheralDelegate>
+@interface BluetoothViewController ()<UITableViewDataSource,UITableViewDelegate,CBCentralManagerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *peripheralDataArray;
 @property (nonatomic,strong) CBCentralManager *manager;
@@ -27,15 +26,6 @@
     self.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     self.peripheralDataArray = [[NSMutableArray alloc]init];
     
-}
-
-- (BOOL)isHeadsetPluggedIn {
-    AVAudioSessionRouteDescription *route = [[AVAudioSession sharedInstance] currentRoute];
-    for (AVAudioSessionPortDescription *desc in [route outputs]) {
-        if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
-            return YES;
-    }
-    return NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +68,7 @@
     }
 }
 
--(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI{
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI{
     
     NSArray *peripherals = [self.peripheralDataArray valueForKey:@"peripheral"];
     if(![peripherals containsObject:peripheral]) {
@@ -118,10 +108,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier"];
+    BluetoothTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle
-                                     reuseIdentifier:@"reuseIdentifier"];
+        cell = [[BluetoothTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle
+                                            reuseIdentifier:@"reuseIdentifier"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
@@ -143,9 +133,11 @@
     
     cell.textLabel.text = peripheralName;
     if(peripheralState == CBPeripheralStateConnected){
-        cell.textLabel.textColor = [UIColor greenColor];
+        cell.stateTextLabel.textColor = UIColorFromHex(0x3cb361);
+        cell.stateTextLabel.text = @"已连接";
     }else{
-        cell.textLabel.textColor = [UIColor redColor];
+        cell.stateTextLabel.textColor = UIColorFromHex(0xc70000);
+        cell.stateTextLabel.text = @"未连接";
     }
 
     //RSSI
@@ -154,7 +146,7 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *item = [self.peripheralDataArray objectAtIndex:indexPath.row];
