@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BabyBluetooth.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,17 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>035CFF8A55BE42EC3FE4534F91B1D6A9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>04CF549EBEEE7BC87AEAE35397184D94</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3B1376B4E6BCA8EB5579865FA5089161</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>754574BB3ADBFD87DC57039ECAF1F0CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,12 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B35CB295C1DF6B318D4EC0A99AD1982D</key>
+		<key>B6153C7C3AC3FD6DB07F152B722B38FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C302B34CBA30EC4E018B220FB50229E1</key>
+		<key>EFC446CAE565EE08EA897AFC636BB3EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

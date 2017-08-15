@@ -109,6 +109,7 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:@"reuseIdentifier"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     if(indexPath.row == 0){
         cell.textLabel.text = @"Bluetooth";

@@ -6,7 +6,6 @@ pod 'Masonry', '~> 1.0'
 pod 'WebViewJavascriptBridge', '~> 5.0'
 pod 'MJRefresh'
 pod 'SVProgressHUD'
-pod 'BabyBluetooth','~> 0.7.0'
 
 target 'iOSBaseDevProject' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
