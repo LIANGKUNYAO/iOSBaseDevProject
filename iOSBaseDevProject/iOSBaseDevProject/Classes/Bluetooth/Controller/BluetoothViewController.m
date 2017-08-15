@@ -9,10 +9,12 @@
 #import "BluetoothViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "SVProgressHUD.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface BluetoothViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface BluetoothViewController ()<UITableViewDataSource,UITableViewDelegate,CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (nonatomic,strong) NSMutableArray *peripheralDataArray;
+@property (nonatomic,strong) CBCentralManager *manager;
 
 @end
 
@@ -21,9 +23,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [SVProgressHUD showInfoWithStatus:@"准备打开设备"];
+
+    self.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     self.peripheralDataArray = [[NSMutableArray alloc]init];
+    
+}
+
+- (BOOL)isHeadsetPluggedIn {
+    AVAudioSessionRouteDescription *route = [[AVAudioSession sharedInstance] currentRoute];
+    for (AVAudioSessionPortDescription *desc in [route outputs]) {
+        if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
+            return YES;
+    }
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,17 +47,39 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-
-}
-
 - (void)viewWillDisappear:(BOOL)animated{
-
+    [self.manager stopScan];
 }
 
-#pragma mark -UIViewController 方法
-//插入table数据
--(void)insertTableView:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
+#pragma mark - bluetooth delegate
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central{
+    switch (central.state){
+        case CBManagerStateUnknown:
+            NSLog(@"State unknown, update imminent.");
+            break;
+        case CBManagerStateResetting:
+            NSLog(@"The connection with the system service was momentarily lost, update imminent.");
+            break;
+        case CBManagerStateUnsupported:
+            NSLog(@"The platform doesn't support the Bluetooth Low Energy Central/Client role.");
+            break;
+        case CBManagerStateUnauthorized:
+            NSLog(@"The application is not authorized to use the Bluetooth Low Energy role.");
+            break;
+        case CBManagerStatePoweredOff:
+            NSLog(@"Bluetooth is currently powered off.");
+            break;
+        case CBManagerStatePoweredOn:
+            NSLog(@"Bluetooth is currently powered on and available to use.");
+            [_manager scanForPeripheralsWithServices:nil options:nil];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI{
+    
     NSArray *peripherals = [self.peripheralDataArray valueForKey:@"peripheral"];
     if(![peripherals containsObject:peripheral]) {
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
@@ -62,13 +96,28 @@
     }
 }
 
-#pragma mark -table委托 table delegate
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
+    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@已连接",peripheral.name]];
+    [self.tableView reloadData];
+    //[peripheral discoverServices:nil];
+}
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@已断开",peripheral.name]];
+    [self.tableView reloadData];
+}
+
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error{
+    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@连接失败",peripheral.name]];
+    [self.tableView reloadData];
+}
+
+#pragma mark - tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.peripheralDataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle
@@ -82,7 +131,7 @@
     NSDictionary *advertisementData = [item objectForKey:@"advertisementData"];
     NSNumber *RSSI = [item objectForKey:@"RSSI"];
     
-    //peripheral的显示名称,优先用kCBAdvDataLocalName的定义，若没有再使用peripheral name
+    //Peripheral的显示名称,优先用kCBAdvDataLocalName的定义，若没有再使用peripheral name
     NSString *peripheralName;
     if ([advertisementData objectForKey:@"kCBAdvDataLocalName"]) {
         peripheralName = [NSString stringWithFormat:@"%@",[advertisementData objectForKey:@"kCBAdvDataLocalName"]];
@@ -94,12 +143,12 @@
     
     cell.textLabel.text = peripheralName;
     if(peripheralState == CBPeripheralStateConnected){
-      cell.textLabel.textColor = [UIColor greenColor];
+        cell.textLabel.textColor = [UIColor greenColor];
     }else{
-      cell.textLabel.textColor = [UIColor redColor];
+        cell.textLabel.textColor = [UIColor redColor];
     }
 
-    //信号和服务
+    //RSSI
     cell.detailTextLabel.text = [NSString stringWithFormat:@"RSSI:%@",RSSI];
     
     return cell;
@@ -107,6 +156,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *item = [self.peripheralDataArray objectAtIndex:indexPath.row];
+    CBPeripheral *peripheral = [item objectForKey:@"peripheral"];
+
+    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@连接中",peripheral.name]];
+    [self.manager connectPeripheral:peripheral options:nil];
 }
 
 @end
