@@ -88,6 +88,10 @@
     [self.tableView setTableFooterView:[[UIView alloc] init]];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    self.headerBgView.frame = CGRectMake(0, 0, size.width, HEADER_HEIGHT);
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES];
     //resetting delegate
@@ -135,6 +139,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat y = scrollView.contentOffset.y;
+    NSLog(@"%f",SCREEN_WIDTH);
     if (y < 0) {
         self.headerBgView.frame = CGRectMake(0, y, SCREEN_WIDTH, HEADER_HEIGHT - y);
     }
