@@ -34,10 +34,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [self.tabBarController.tabBar setHidden:YES];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [self.tabBarController.tabBar setHidden:NO];
     [self.manager stopScan];
 }
 

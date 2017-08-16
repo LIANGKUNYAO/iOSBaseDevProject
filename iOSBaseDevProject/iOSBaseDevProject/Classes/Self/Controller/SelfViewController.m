@@ -122,7 +122,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(indexPath.row == 0){
+    if(indexPath.section == 0 && indexPath.row == 0){
         BluetoothViewController *vc = [[BluetoothViewController alloc]init];
         vc.title = @"Bluetooth";
         [self.navigationController pushViewController:vc animated:YES];

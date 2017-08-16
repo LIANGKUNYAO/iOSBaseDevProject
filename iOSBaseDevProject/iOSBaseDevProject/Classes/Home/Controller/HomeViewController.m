@@ -102,6 +102,16 @@
             WebViewController *vc = [[WebViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            UIViewController *vc = [[UIViewController alloc]init];
+            vc.title = [NSString stringWithFormat:@"UITableCellView %zd",indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                });
+            });
         }
     }];
     [MenuView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
