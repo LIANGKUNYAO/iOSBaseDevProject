@@ -17,22 +17,22 @@ PODS:
   - Masonry (1.1.0)
   - MJRefresh (3.1.14)
   - SVProgressHUD (2.2.1)
-  - WebViewJavascriptBridge (5.2.0)
+  - WebViewJavascriptBridge (6.0.2)
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.1.0)
-  - Masonry (~> 1.0)
+  - AFNetworking
+  - Masonry
   - MJRefresh
   - SVProgressHUD
-  - WebViewJavascriptBridge (~> 5.0)
+  - WebViewJavascriptBridge
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 6642e35b3227a5447b9fd5e17c552c90196c9859
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
-  WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
+  WebViewJavascriptBridge: 791ee0e26d1bf15efe5fb7fb9666a71a19b89d77
 
-PODFILE CHECKSUM: f6346145bc49d79d8b4462b43054d6db56f9a4b7
+PODFILE CHECKSUM: 4544c7c1636bfbaa5c6bff7572195b051e38cca5
 
 COCOAPODS: 1.3.1
