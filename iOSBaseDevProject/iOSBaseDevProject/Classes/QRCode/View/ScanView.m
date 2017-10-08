@@ -81,7 +81,7 @@
             layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
             layer.frame = self.bounds;
             [self.layer insertSublayer:layer above:0];
-        }else{
+        } else {
             if(initCallback){
                 initCallback(error);
             }

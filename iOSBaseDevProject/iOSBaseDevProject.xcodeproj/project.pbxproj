@@ -268,8 +268,6 @@
 			isa = PBXGroup;
 			children = (
 				B53A22101EEAD9A70081DE7B /* Controller */,
-				B53A22111EEAD9A70081DE7B /* Model */,
-				B53A22121EEAD9A70081DE7B /* View */,
 			);
 			path = Webview;
 			sourceTree = "<group>";
@@ -283,25 +281,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		B53A22111EEAD9A70081DE7B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		B53A22121EEAD9A70081DE7B /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		B54A488C1F41D2A500BA23B8 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
 				B54A488D1F41D2DF00BA23B8 /* Controller */,
-				B54A488E1F41D2DF00BA23B8 /* Model */,
 				B54A488F1F41D2DF00BA23B8 /* View */,
 			);
 			path = Bluetooth;
@@ -314,13 +297,6 @@
 				B54A48911F41D8D000BA23B8 /* BluetoothViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		B54A488E1F41D2DF00BA23B8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B54A488F1F41D2DF00BA23B8 /* View */ = {
@@ -336,7 +312,6 @@
 			isa = PBXGroup;
 			children = (
 				B55EB9591EF02548002F4F2A /* Controller */,
-				B55EB95A1EF02548002F4F2A /* Model */,
 				B55EB95B1EF02548002F4F2A /* View */,
 			);
 			path = QRCode;
@@ -349,13 +324,6 @@
 				B55EB9601EF0266B002F4F2A /* QRHandlerViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		B55EB95A1EF02548002F4F2A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B55EB95B1EF02548002F4F2A /* View */ = {
@@ -533,8 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				B59C6C891F0497F3009B2D9E /* Controller */,
-				B59C6C8A1F0497F3009B2D9E /* Model */,
-				B59C6C8B1F0497F3009B2D9E /* View */,
 			);
 			path = Self;
 			sourceTree = "<group>";
@@ -546,20 +512,6 @@
 				B59C6C8D1F049827009B2D9E /* SelfViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		B59C6C8A1F0497F3009B2D9E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		B59C6C8B1F0497F3009B2D9E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B59C6C8F1F049AFD009B2D9E /* Self */ = {

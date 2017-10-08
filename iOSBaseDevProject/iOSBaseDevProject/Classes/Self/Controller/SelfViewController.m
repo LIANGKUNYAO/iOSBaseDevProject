@@ -139,7 +139,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat y = scrollView.contentOffset.y;
-    NSLog(@"%f",SCREEN_WIDTH);
     if (y < 0) {
         self.headerBgView.frame = CGRectMake(0, y, SCREEN_WIDTH, HEADER_HEIGHT - y);
     }

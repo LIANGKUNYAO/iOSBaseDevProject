@@ -32,7 +32,7 @@
         NSLog(@"第一次启动");
         //设置标志，下次启动不再进入
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"VersionCache"];
-    }else{
+    } else {
         NSLog(@"不是第一次启动");
         ViewController *vc = [[ViewController alloc] init];
         self.window.rootViewController = vc;

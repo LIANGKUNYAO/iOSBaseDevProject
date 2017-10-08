@@ -72,8 +72,8 @@
         
         BOOL useWebview = YES;
         // webview could run javascript
-        if(useWebview){
-            if(!self.webview){
+        if (useWebview) {
+            if (!self.webview) {
                 self.webview = [[UIWebView alloc] init];
                 self.webview.delegate = self;
                 [self.view addSubview:self.webview];
@@ -88,7 +88,7 @@
 //            NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
 //            [webView loadHTMLString:appHtml baseURL:baseURL];
             
-        }else{
+        } else {
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             manager.responseSerializer = [AFHTTPResponseSerializer serializer];
             [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/html", nil]];
@@ -109,19 +109,35 @@
                 [self showError:error];
             }];
         }
-    }else{
+    } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
             });
         });
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"无法识别的二维码格式" forKey:NSLocalizedDescriptionKey];
+        NSString *errMsg = [NSString stringWithFormat:@"识别到的二维码为:\n%@",result];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
         NSString *BundleId = BundleValue(@"CFBundleIdentifier");
         NSError *error = [NSError errorWithDomain:BundleId code:-1 userInfo:userInfo];
         
         [self showError:error];
     }
 }
+
+//webview加载前的回调
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    return YES;
+}
+    
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    });
+    [self showError:error];
+}
+    
 //webview加载完成后的回调
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *JsToGetHTMLSource = @"document.documentElement.innerHTML";
@@ -138,10 +154,7 @@
         [self sendEmailWithSubject:webView.request.URL.absoluteString message:htmlString recipients:MAILLIST];
     }
 }
-//webview加载前的回调
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    return YES;
-}
+
 //Email发送后回调
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
@@ -151,7 +164,7 @@
 - (void)sendEmailWithSubject:(NSString *)subject message:(NSString *)message recipients:(NSArray *)recipients{
     if (![MFMailComposeViewController canSendMail]) {
         [self.scanView startScan];
-    }else{
+    } else {
         MFMailComposeViewController *mailVc = [[MFMailComposeViewController alloc] init];
         // 设置邮件主题
         [mailVc setSubject:subject];
@@ -163,21 +176,21 @@
         mailVc.mailComposeDelegate = self;
         // 显示控制器
         // 若已经Present，则dismiss
-        if([self presentedViewController]){
+        if ([self presentedViewController]) {
             [[self presentedViewController] dismissViewControllerAnimated:YES completion:nil];
         }
         [self presentViewController:mailVc animated:YES completion:nil];
     }
 }
 - (void)showError:(NSError *)error{
-    if(error){
+    if (error) {
         NSString *errMsg = [error localizedDescription];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:errMsg preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.scanView startScan];
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
-    }else{
+    } else {
         [self.scanView startScan];
     }
 }

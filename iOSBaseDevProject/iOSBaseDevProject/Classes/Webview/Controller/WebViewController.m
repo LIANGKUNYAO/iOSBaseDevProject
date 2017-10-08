@@ -17,7 +17,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES];
-    [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     if (!self.bridge) {
         self.view.backgroundColor = UIColorFromHex(0xF7F7F7);

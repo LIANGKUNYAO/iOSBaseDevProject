@@ -40,8 +40,7 @@
     [self.navigationItem setRightBarButtonItem:rBtn];
     
     self.contentView = [self getScrollContentViewWithBgColor:0xF0F0F0];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.automaticallyAdjustsScrollViewInsets = YES;
     WeakSelf(weakSelf);
     [self.contentView addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -98,11 +97,11 @@
     [MenuView setDidSelectItem:^(NSIndexPath *indexPath){
         NSLog(@"-->%ld -->%ld",(long)indexPath.section,(long)indexPath.row);
         [SVProgressHUD show];
-        if(indexPath.section == 0 && indexPath.row == 0){
+        if (indexPath.section == 0 && indexPath.row == 0) {
             WebViewController *vc = [[WebViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else{
+        } else {
             UIViewController *vc = [[UIViewController alloc]init];
             vc.title = [NSString stringWithFormat:@"UITableCellView %zd",indexPath.row];
             [self.navigationController pushViewController:vc animated:YES];
@@ -117,7 +116,7 @@
     [MenuView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
         MenuInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         UIImage *menuImg = [UIImage imageNamed:model.imgName];
-        if(!menuImg){
+        if (!menuImg) {
             menuImg = [UIImage imageNamed:@"defaultMenuItem"];
         }
         [(MenuCellView *)cell setCellTitle:model.menuName withImage:menuImg];
@@ -158,6 +157,12 @@
     }];
     scrollView.delegate = self;
     
+    if (@available(iOS 11.0, *)) {
+        [scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     UIView *contentView = [[UIView alloc]init];
     [scrollView addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -169,7 +174,7 @@
 }
 //HeaderView
 - (UIImageView *)headerView{
-    if(!_headerView){
+    if (!_headerView) {
         _headerView = [[UIImageView alloc]init];
         [_headerView setImage:[UIImage imageNamed:@"bgRed"]];
         [_headerView setContentMode:UIViewContentModeScaleAspectFill];
@@ -225,7 +230,7 @@
         //栏目名称
         if (i == 0) {
             model.menuName = [NSString stringWithFormat:@"UIWebView"];
-        }else{
+        } else {
             model.menuName = [NSString stringWithFormat:@"栏目%d",i];
         }
         //栏目编号
