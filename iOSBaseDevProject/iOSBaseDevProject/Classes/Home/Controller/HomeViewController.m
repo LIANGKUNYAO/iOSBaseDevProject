@@ -20,7 +20,7 @@
 #define ITEMPERLINE 4
 
 @interface HomeViewController ()<UIScrollViewDelegate>
-@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *headerView;
 @end
 
@@ -39,13 +39,21 @@
     [rBtn setTag:0];
     [self.navigationItem setRightBarButtonItem:rBtn];
     
-    self.contentView = [self getScrollContentViewWithBgColor:0xF0F0F0];
-    self.automaticallyAdjustsScrollViewInsets = YES;
     WeakSelf(weakSelf);
-    [self.contentView addSubview:self.headerView];
+    self.scrollView = [self getScrollContentViewWithBgColor:0xF0F0F0];
+    
+    UIView *contentView = [[UIView alloc]init];
+    [self.scrollView addSubview:contentView];
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.left.equalTo(weakSelf.scrollView);
+        make.bottom.equalTo(weakSelf.scrollView).with.offset(-64);   //留出部分冗余
+        make.width.equalTo(weakSelf.scrollView);                     //水平方向不滚动
+    }];
+    
+    [contentView addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.contentView);
-        make.left.right.equalTo(weakSelf.contentView);
+        make.top.equalTo(contentView);
+        make.left.right.equalTo(contentView);
         make.height.mas_equalTo(250);
     }];
     
@@ -68,10 +76,10 @@
         FinanceInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [(FinanceCellView *)cell setCellTitle:model.title tags:model.tags withRate:model.rate];
     }];
-    [self.contentView addSubview:financeView];
+    [contentView addSubview:financeView];
     [financeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.headerView.mas_bottom);
-        make.left.right.equalTo(weakSelf.contentView);
+        make.left.right.equalTo(contentView);
         make.height.mas_equalTo(110);
     }];
     
@@ -121,12 +129,12 @@
         }
         [(MenuCellView *)cell setCellTitle:model.menuName withImage:menuImg];
     }];
-    [self.contentView addSubview:MenuView];
+    [contentView addSubview:MenuView];
     [MenuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(financeView.mas_bottom);
-        make.left.right.equalTo(weakSelf.contentView);
+        make.left.right.equalTo(contentView);
         make.height.mas_equalTo(82*lineNum);
-        make.bottom.equalTo(weakSelf.contentView);
+        make.bottom.equalTo(contentView);
     }];
 }
 
@@ -143,11 +151,13 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //设置导航按钮颜色
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self scrollViewDidScroll:self.scrollView];
 }
 
 #pragma mark - UIs
 //ScrollView
-- (UIView *)getScrollContentViewWithBgColor:(int)bgColor{
+- (UIScrollView *)getScrollContentViewWithBgColor:(int)bgColor{
     WeakSelf(weakSelf);
     UIScrollView *scrollView = [[UIScrollView alloc]init];
     scrollView.backgroundColor = UIColorFromHex(bgColor);
@@ -162,15 +172,7 @@
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    
-    UIView *contentView = [[UIView alloc]init];
-    [scrollView addSubview:contentView];
-    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.left.equalTo(scrollView);
-        make.bottom.equalTo(scrollView).with.offset(-64);   //留出部分冗余
-        make.width.equalTo(scrollView);                     //水平方向不滚动
-    }];
-    return contentView;
+    return scrollView;
 }
 //HeaderView
 - (UIImageView *)headerView{
