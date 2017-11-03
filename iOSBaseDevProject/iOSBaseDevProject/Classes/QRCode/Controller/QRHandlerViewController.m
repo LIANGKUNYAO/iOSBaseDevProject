@@ -147,12 +147,7 @@
             [SVProgressHUD dismiss];
         });
     });
-    NSString *search = @"https://www.sgs.gov.cn/notice/query/queryEntInfoMain.do";
-    NSString *mstr = webView.request.URL.absoluteString;
-    NSRange substr = [mstr rangeOfString:search];
-    if (substr.location == NSNotFound) {
-        [self sendEmailWithSubject:webView.request.URL.absoluteString message:htmlString recipients:MAILLIST];
-    }
+    [self sendEmailWithSubject:webView.request.URL.absoluteString message:htmlString recipients:MAILLIST];
 }
 
 //Email发送后回调
