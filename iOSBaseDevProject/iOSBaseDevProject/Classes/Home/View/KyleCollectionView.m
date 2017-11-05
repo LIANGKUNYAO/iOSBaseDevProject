@@ -57,7 +57,7 @@
 //didSelectItemAtIndexPath
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.didSelectItem) {
-        self.didSelectItem(indexPath);
+        self.didSelectItem(indexPath,self.viewData);
     }
 }
 

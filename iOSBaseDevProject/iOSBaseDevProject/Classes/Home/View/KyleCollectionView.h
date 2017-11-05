@@ -13,7 +13,7 @@
 /**
  *  Callback Function : Handle the Click Event
  */
-@property (nonatomic, copy) void (^didSelectItem)(NSIndexPath * indexPath);
+@property (nonatomic, copy) void (^didSelectItem)(NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData);
 
 @property (nonatomic, copy) void (^willDisplayCell)(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData);
 

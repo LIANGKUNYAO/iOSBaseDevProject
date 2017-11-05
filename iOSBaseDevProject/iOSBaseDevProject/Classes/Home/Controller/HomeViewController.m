@@ -69,7 +69,7 @@
     [financeView setShowsHorizontalScrollIndicator:NO];
     [financeView setCellClass:[FinanceCellView class]];
     [financeView setViewData:[self getFinanceData]];
-    [financeView setDidSelectItem:^(NSIndexPath *indexPath){
+    [financeView setDidSelectItem:^(NSIndexPath *indexPath, NSArray<__kindof NSArray *> *viewData){
         NSLog(@"%ld",(long)indexPath.row);
     }];
     [financeView setWillDisplayCell:^(UICollectionView *collectionView,UICollectionViewCell *cell, NSIndexPath * indexPath, NSArray<__kindof NSArray *> *viewData){
@@ -96,16 +96,17 @@
     [MenuView setShowsVerticalScrollIndicator:NO];
     [MenuView setShowsHorizontalScrollIndicator:NO];
     [MenuView setCellClass:[MenuCellView class]];
-    NSArray *menuViewData = [self getMenuData];
-    NSArray *menuData = [menuViewData objectAtIndex:0];
+    NSArray *menuArray = [self getMenuData];
+    NSArray *homeMenuArray = [menuArray objectAtIndex:0];
     //向上取整 ceil()
     //向下取整 floor()
-    NSUInteger lineNum = ceil((float)menuData.count/ITEMPERLINE);
-    [MenuView setViewData:menuViewData];
-    [MenuView setDidSelectItem:^(NSIndexPath *indexPath){
-        NSLog(@"-->%ld -->%ld",(long)indexPath.section,(long)indexPath.row);
+    NSUInteger lineNum = ceil((float)homeMenuArray.count/ITEMPERLINE);
+    [MenuView setViewData:menuArray];
+    [MenuView setDidSelectItem:^(NSIndexPath *indexPath, NSArray<__kindof NSArray *> *viewData){
         [SVProgressHUD show];
-        if (indexPath.section == 0 && indexPath.row == 0) {
+        MenuInfo *model = [[viewData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        NSLog(@"%@",model.menuName);
+        if ([model.menuId isEqualToString:@"00000000"]) {
             WebViewController *vc = [[WebViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
@@ -189,8 +190,12 @@
     CGFloat y = scrollView.contentOffset.y;
     //禁止向上延伸
     scrollView.bounces = (y <= 0) ? NO : YES;
-    //向下时设置导航栏颜色
-    UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,y/100);
+    //向下时设置导航栏颜色,必须保证始终是透明的，否则会占用面积
+    CGFloat alpha = y/100;
+    if (alpha > 0.8) {
+        alpha = 0.8;
+    }
+    UIColor *color = UIColorFromHexWithAlpha(0xBE0A14,alpha);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:color] forBarMetrics:UIBarMetricsDefault];
 }
 
@@ -226,7 +231,7 @@
 
 - (NSArray *)getMenuData{
     NSMutableArray *menuArray = [NSMutableArray arrayWithCapacity:0];
-    NSMutableArray *menuArray1 = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *homeMenuArray = [NSMutableArray arrayWithCapacity:0];
     for (int i = 0; i < 23; i++) {
         MenuInfo *model = [[MenuInfo alloc]init];
         //栏目名称
@@ -236,12 +241,12 @@
             model.menuName = [NSString stringWithFormat:@"栏目%d",i];
         }
         //栏目编号
-        model.menuId= [NSString stringWithFormat:@"%d",i];
+        model.menuId= [NSString stringWithFormat:@"%08d",i];
         //栏目图片
-        model.imgName = [NSString stringWithFormat:@"menuItem%08d",i];
-        [menuArray1 addObject:model];
+        model.imgName = [NSString stringWithFormat:@"menuItem%@",model.menuId];
+        [homeMenuArray addObject:model];
     }
-    [menuArray addObject:menuArray1];
+    [menuArray addObject:homeMenuArray];
     return menuArray;
 }
 
