@@ -61,6 +61,8 @@
     
     //设置顶部视图
     [self.tableView setTableHeaderView:headerView];
+    //适配iPad
+    self.tableView.cellLayoutMarginsFollowReadableWidth = NO;
     
     WeakSelf(weakSelf);
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,7 +87,10 @@
     }];
     
     //设置底部视图，去掉多余的分割线
-    [self.tableView setTableFooterView:[[UIView alloc] init]];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+    footerView.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    [self.tableView setTableFooterView:footerView];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
